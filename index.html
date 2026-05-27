@@ -1,0 +1,5399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgAI Hero</title>
+  <link rel="icon" type="image/png" href="logo-collapsed.png">
+  <link rel="apple-touch-icon" href="logo-collapsed.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    /* ─── SITE HEADER ───────────────────────────────────────────── */
+    .site-header {
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      width: 100%;
+      height: 66px;
+      background: #ffffff00;
+      box-shadow: 0 0 360px #ffffff00 inset;
+      position: fixed;
+      filter: blur(10px);
+    }
+
+    .site-header-inner {
+      width: min(1240px, calc(100vw - 72px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: auto;
+      position: fixed;
+      background: transparent;
+      top: 0;
+      z-index: 100;
+      height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand img {
+      width: 92px;
+      height: auto;
+      display: block;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      margin-left: 78px;
+      color: #062e69;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .site-nav a,
+    .header-actions a {
+      color: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: #062e69;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .header-cta {
+      height: 44px;
+      min-width: 135px;
+      padding: 0 23px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: #fff !important;
+      background: linear-gradient(180deg, #0b4a9f, #073577);
+      box-shadow: 0 10px 20px rgba(5, 47, 105, .2), inset 0 1px 0 rgba(255, 255, 255, .18);
+      text-decoration: none;
+    }
+
+    :root {
+      --navy: #08346f;
+      --soft: #334978;
+      --teal: #28c4bf;
+      --cyan: #22c3d7;
+      --green: #38ca82;
+      --purple: #6f55e8;
+      --bg-url: url("hero-bg.png");
+      --hero-bg-y: -60px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Inter, Arial, sans-serif;
+      background: #f8fbff;
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      background-attachment: fixed;
+      background-image: url("background.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: left 2px top var(--hero-bg-y);
+    }
+
+    .hero {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      isolation: isolate;
+      width: 100%;
+      display: contents;
+    }
+
+    .hero-wrapper {
+      display: block;
+      height: 711px;
+      width: 0;
+      padding-top: 90px;
+    }
+
+    .hero::before {
+      position: fixed;
+      inset: -5px -70px -20px 430px;
+      opacity: .98;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .left {
+      position: absolute;
+      left: 108px;
+      top: 120px;
+      width: 450px;
+      z-index: 3;
+      height: 880px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.06;
+      letter-spacing: .2px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      margin: 19px 0 31px;
+      color: #2f4778;
+      font-size: 15.2px;
+      line-height: 1.5;
+      font-weight: 700
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 112px 126px 185px;
+      gap: 18px;
+      margin-bottom: 37px;
+      align-items: start;
+      filter: hue-rotate(315deg);
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 11px
+    }
+
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #bab8fa2b;
+      box-shadow: 0 8px 16px rgba(20, 150, 138, .08), inset 0 1px 0 rgba(255, 255, 255, .9)
+    }
+
+    .icon-circle svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: #25a99a;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .feature span {
+      font-size: 11.8px;
+      line-height: 1.55;
+      font-weight: 800;
+      color: #273d71
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 30px
+    }
+
+    .btn {
+      height: 43px;
+      border-radius: 999px;
+      border: 0;
+      font: 800 12.4px Inter, Arial, sans-serif;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      white-space: nowrap;
+      cursor: pointer
+    }
+
+    .btn-primary {
+      width: 207px;
+      color: #fff;
+      background: linear-gradient(180deg, #0b4a9f, #073577);
+      box-shadow: 0 12px 22px rgba(6, 48, 105, .19), inset 0 1px 0 rgba(255, 255, 255, .18);
+    }
+
+    .btn-secondary {
+      width: 181px;
+      color: #153e82;
+      background: rgba(255, 255, 255, .82);
+      border: 1.6px solid #9fc1ff;
+      box-shadow: 0 8px 14px rgba(69, 119, 185, .08)
+    }
+
+    .arrow {
+      font-size: 18px;
+      line-height: 1;
+      transform: translateY(-1px)
+    }
+
+    .play {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #557bd1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 8px;
+      color: #557bd1;
+      padding-left: 1px
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      gap: 17px
+    }
+
+    .avatars {
+      display: flex;
+      padding-left: 3px
+    }
+
+    .avatar {
+      width: 43px;
+      height: 43px;
+      margin-left: -8px;
+      border: 3px solid #f7fbfa;
+      border-radius: 50%;
+      box-shadow: 0 6px 12px rgba(20, 72, 115, .14);
+      background: #ddd;
+      position: relative;
+      overflow: hidden
+    }
+
+    .avatar:first-child {
+      margin-left: 0
+    }
+
+    .avatar::before {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(75, 38, 27, .8)
+    }
+
+    .avatar::after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 24px;
+      width: 22px;
+      height: 20px;
+      border-radius: 50% 50% 0 0;
+      background: rgba(255, 255, 255, .7)
+    }
+
+    .a1 {
+      background: linear-gradient(135deg, #f3c6bd, #d6f1ef)
+    }
+
+    .a2 {
+      background: linear-gradient(135deg, #7d4d36, #1fb7c5)
+    }
+
+    .a3 {
+      background: linear-gradient(135deg, #dfc1a1, #9fe0dd)
+    }
+
+    .stars {
+      color: #20bfb7;
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      white-space: nowrap
+    }
+
+    .trust-text {
+      font-size: 11.8px;
+      line-height: 1.48;
+      font-weight: 800;
+      color: #18366f
+    }
+
+    .visual {
+      position: sticky;
+      left: 658px;
+      top: 34px;
+      width: 520px;
+      height: 560px;
+      z-index: 2;
+    }
+
+    .sticky {
+      position: sticky;
+      left: 0;
+      top: 34px;
+      width: 100%;
+      height: fit-content;
+      z-index: 2;
+      display: flex;
+      gap: 80px;
+      justify-content: center;
+      align-items: center;
+      padding: 140px 0;
+    }
+
+    .app {
+      left: 14px;
+      top: 36px;
+      width: 425px;
+      height: 475px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .86);
+      box-shadow: 0 24px 58px rgba(57, 73, 145, .16), 0 8px 24px rgba(90, 105, 180, .09), inset 0 0 0 1px rgba(255, 255, 255, .96);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .sidebar {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 71px;
+      background: rgba(255, 255, 255, .7);
+      border-right: 1px solid rgba(232, 236, 255, .86);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 24px;
+      gap: 22px;
+      box-shadow: 10px 0 35px rgba(65, 82, 160, .04)
+    }
+
+    .ai-logo {
+      width: 30px;
+      height: 32px;
+      margin: 0 0 10px;
+      display: grid;
+      place-items: center;
+    }
+
+    .ai-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      color: #253db4
+    }
+
+    .nav-icon.cyan {
+      color: #10b8cd
+    }
+
+    .nav-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .content {
+      position: absolute;
+      left: 103px;
+      top: 42px;
+      width: 286px
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #1d286d;
+      margin-bottom: 22px;
+      letter-spacing: -.15px
+    }
+
+    .sound {
+      width: 15px;
+      height: 15px;
+      color: #29c5d6
+    }
+
+    .equation-card {
+      width: 299px;
+      height: 65px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .84);
+      box-shadow: 0 11px 26px rgba(75, 87, 160, .085), 0 3px 12px rgba(75, 87, 160, .045), inset 0 0 0 1px rgba(255, 255, 255, .95);
+      display: flex;
+      align-items: center;
+      padding-left: 18px;
+      margin-bottom: 28px
+    }
+
+    .equation {
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: 1.7px;
+      white-space: nowrap
+    }
+
+    .green {
+      color: #31c477
+    }
+
+    .cyan2 {
+      color: #13bfd4
+    }
+
+    .purple {
+      color: #6652df
+    }
+
+    .intro {
+      font-size: 11px;
+      font-weight: 800;
+      color: #1c286d;
+      margin-bottom: 13px;
+      letter-spacing: -.1px
+    }
+
+    .steps {
+      width: 299px;
+      height: 235px;
+      padding-left: 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .56);
+      box-shadow: 0 13px 32px rgba(65, 80, 150, .055), inset 0 0 0 1px rgba(238, 241, 255, .82);
+      overflow: hidden
+    }
+
+    .step {
+      position: relative;
+      height: 78px;
+      display: grid;
+      grid-template-columns: 30px 83px 44px 62px;
+      align-items: center;
+      padding-left: 2px;
+      border-bottom: 1px solid rgba(222, 228, 250, .78);
+      color: #1c286e
+    }
+
+    .step:last-child {
+      border-bottom: 0
+    }
+
+    .num {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #f6f8ff;
+      box-shadow: 0 3px 8px rgba(42, 58, 140, .08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: #24368f
+    }
+
+    .math {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      white-space: nowrap
+    }
+
+    .work {
+      position: absolute;
+      top: 46px;
+      font-size: 17px;
+      font-weight: 700;
+      color: rgba(105, 112, 170, .64);
+      line-height: 1
+    }
+
+    .work-left {
+      left: 68px
+    }
+
+    .work-right {
+      left: 148px
+    }
+
+    .work-right-2 {
+      left: 148px;
+      color: rgba(60, 190, 145, .52)
+    }
+
+    .step-2 {
+      grid-template-columns: 30px 100px 65px 62px
+    }
+
+    .answer-row {
+      grid-template-columns: 30px 43px 53px 1fr
+    }
+
+    .answer {
+      width: 51px;
+      height: 38px;
+      border-radius: 6px;
+      background: rgba(69, 209, 140, .24);
+      color: #26a86d;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .float-card {
+      position: absolute;
+      right: 1px;
+      top: 209px;
+      width: 134px;
+      height: 188px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: 0 24px 58px rgba(60, 65, 145, .2), 0 8px 22px rgba(90, 100, 180, .08), inset 0 0 0 1px rgba(255, 255, 255, .96);
+      backdrop-filter: blur(18px);
+      color: #27367b
+    }
+
+    .sparkle-icon {
+      position: absolute;
+      left: 23px;
+      top: 23px;
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(58, 70, 150, .11), 0 3px 8px rgba(58, 70, 150, .05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: linear-gradient(135deg, #2f79f4, #23c7dc 45%, #49df8c 58%, #8f53f3 85%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    .float-text {
+      position: absolute;
+      left: 24px;
+      top: 71px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      font-weight: 800;
+      letter-spacing: -.1px
+    }
+
+    .heart {
+      position: absolute;
+      left: 24px;
+      bottom: 23px;
+      width: 21px;
+      height: 21px;
+      color: #2940bd;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    @media(max-width:900px) {
+      .hero {
+        min-height: 980px
+      }
+
+      .left {
+        left: 38px;
+        top: 44px
+      }
+
+      .visual {
+        left: 25px;
+        top: 405px;
+        transform: scale(.86);
+        transform-origin: top left
+      }
+
+      .hero::before {
+        inset: 350px -250px -80px -80px;
+        background-size: 900px 600px
+      }
+
+      .hero::after {
+        background: linear-gradient(#fff 0 32%, rgba(255, 255, 255, .2) 70%, #fff)
+      }
+    }
+
+
+    .steps-section {
+      width: 100%;
+      height: 0;
+      padding: 39px 31px 22px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      top: 140px;
+    }
+
+    .steps-section-wrapper {
+      display: block;
+      height: 0;
+      position: relative;
+      top: 50px;
+      padding: 0 0 140px 0;
+    }
+
+    .subjects-grid-wrapper {
+      display: block;
+      height: 1000px;
+      position: relative;
+      top: 50px;
+    }
+
+    .step-card {
+      width: 304px;
+      height: 278px;
+      position: relative;
+      padding: 35px 24px 18px;
+      border-radius: 16px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow:
+        0 18px 36px rgba(21, 34, 82, 0.10),
+        0 6px 16px rgba(21, 34, 82, 0.06),
+        inset 0 0 0 1px rgba(225, 229, 242, 0.75);
+    }
+
+    .step-badge {
+      position: absolute;
+      top: -19px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(79, 96, 229, 0.28);
+    }
+
+    .step-card:nth-of-type(1) .step-badge,
+    .step-card:nth-of-type(3) .step-badge {
+      background: linear-gradient(145deg, #617cff 0%, #592067 100%);
+    }
+
+    .step-card:nth-of-type(2) .step-badge {
+      background: linear-gradient(145deg, #34cbc4 0%, #20a9a8 100%);
+      box-shadow: 0 8px 18px rgba(32, 169, 168, 0.25);
+    }
+
+    .step-card h3 {
+      margin: 0 0 14px;
+      font-size: 17px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      color: #14308b;
+    }
+
+    .step-card p {
+      margin: 0 auto;
+      max-width: 100%;
+      font-size: 12.5px;
+      line-height: 1.75;
+      font-weight: 600;
+      color: #203163;
+    }
+
+    .question-box,
+    .validation-box,
+    .explanation-box {
+      background: #ffffff;
+      box-shadow:
+        0 12px 26px rgba(22, 35, 84, 0.10),
+        inset 0 0 0 1px rgba(232, 235, 246, 0.95);
+    }
+
+    .question-box {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 14px;
+      height: 112px;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    .question-placeholder {
+      height: 61px;
+      padding: 17px 18px;
+      text-align: left;
+      font-size: 11.5px;
+      line-height: 1;
+      font-weight: 600;
+      color: #4d5d8d;
+    }
+
+    .toolbar {
+      height: 51px;
+      border-top: 1px solid #eef1f8;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .tool {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      color: #6978ff;
+    }
+
+    .tool svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2.4;
+    }
+
+    .mini-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 116px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .mini-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #2ac6b5;
+    }
+
+    .validation-box {
+      position: absolute;
+      left: 33px;
+      right: 42px;
+      bottom: 14px;
+      height: 92px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      padding: 0 20px;
+    }
+
+    .shield-gradient {
+      position: relative;
+      width: 46px;
+      height: 50px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      filter: drop-shadow(0 8px 12px rgba(35, 183, 183, 0.24));
+    }
+
+    .shield-gradient>svg {
+      width: 46px;
+      height: 50px;
+      stroke: none !important;
+      fill: url(#shieldGradient) !important;
+    }
+
+    .shield-check {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+    }
+
+    .shield-check svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2.9;
+    }
+
+    .validation-content {
+      flex: 1;
+      text-align: left;
+      padding-top: 2px;
+    }
+
+    .validation-content strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #35426c;
+    }
+
+    .progress {
+      width: 132px;
+      height: 4px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e7eaf1;
+    }
+
+    .progress span {
+      display: block;
+      width: 70%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #23c1b2 0%, #32cdd4 100%);
+    }
+
+    .explanation-box {
+      position: absolute;
+      left: 38px;
+      right: 56px;
+      bottom: 14px;
+      height: 111px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 19px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .check-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #38c89b;
+      color: #ffffff;
+    }
+
+    .check-dot svg {
+      width: 7px;
+      height: 7px;
+      stroke-width: 4;
+    }
+
+    .line {
+      width: 91px;
+      height: 5px;
+      border-radius: 999px;
+      background: #dce1e9;
+    }
+
+    .line.small {
+      width: 73px;
+    }
+
+    .sparkle-circle {
+      width: 52px;
+      height: 52px;
+      margin-left: auto;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ffffff;
+      color: #6878ff;
+      box-shadow: 0 13px 24px rgba(23, 35, 92, 0.11);
+    }
+
+    .sparkle-circle svg {
+      width: 27px;
+      height: 27px;
+      stroke-width: 2.4;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 280px;
+      width: 65px;
+      height: 28px;
+      color: #5f70ff;
+    }
+
+    .arrow-1 {
+      left: 312px;
+    }
+
+    .arrow-2 {
+      left: 694px;
+    }
+
+    .arrow svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .steps-section {
+        width: 100%;
+        height: auto;
+        padding: 50px 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 44px;
+      }
+
+      .arrow {
+        display: none;
+      }
+    }
+
+    .subjects-grid {
+      width: 100%;
+      max-width: 100%;
+      display: grid;
+      padding: 140px 0;
+      height: 1100px;
+    }
+
+
+    .subject-card {
+      height: 128px;
+      border-radius: 10px;
+      background-color: #fff;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow:
+        0 8px 18px rgba(20, 30, 60, 0.08),
+        0 1px 4px rgba(20, 30, 60, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .subject-card svg {
+      width: 38px;
+      height: 38px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .subject-card span {
+      font-size: 15px;
+      font-weight: 700;
+      color: #101f54;
+      line-height: 1;
+      letter-spacing: -0.2px;
+    }
+
+    .bg-1 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-01.png");
+    }
+
+    .bg-2 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-02.png");
+    }
+
+    .bg-3 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-03.png");
+    }
+
+    .bg-4 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-04.png");
+    }
+
+    .bg-5 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-05.png");
+    }
+
+    .bg-6 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-06.png");
+    }
+
+    .bg-7 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-07.png");
+    }
+
+    .bg-8 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-08.png");
+    }
+
+    .bg-9 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-09.png");
+    }
+
+    .bg-10 {
+      background-image: url("./algai-watercolor-backgrounds/algai-watercolor-10.png");
+    }
+
+    @media (max-width: 900px) {
+      .subjects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .composition {
+      width: 100%;
+      position: relative;
+      display: flex;
+      margin-bottom: 140px;
+      height: 550px;
+    }
+
+    /* LEFT COPY BLOCK */
+    .parents-copy {
+      position: absolute;
+      left: 80px;
+      top: 79px;
+      width: 345px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin-bottom: 15px;
+    }
+
+    .parents-copy h1 {
+      margin: 0;
+      font-size: 29px;
+      line-height: 1.03;
+      font-weight: 760;
+      letter-spacing: -.034em;
+      color: var(--navy);
+    }
+
+    .sparkles {
+      width: 26px;
+      height: 26px;
+      margin-top: -5px;
+      filter: drop-shadow(0 5px 8px rgba(81, 103, 205, .12));
+    }
+
+    .intro {
+      margin: 0 0 27px;
+      max-width: 285px;
+      font-size: 14px;
+      line-height: 1.72;
+      font-weight: 650;
+      letter-spacing: -.018em;
+      color: #273a71;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 18px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .icon-bubble {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--soft-blue);
+      box-shadow: inset 0 0 0 1px rgba(84, 132, 185, .08), 0 5px 12px rgba(55, 87, 139, .04);
+    }
+
+    .feature:nth-child(1) .icon-bubble,
+    .feature:nth-child(2) .icon-bubble {
+      background: var(--soft-green)
+    }
+
+    .icon-bubble svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: #4977b6;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature:nth-child(1) svg,
+    .feature:nth-child(2) svg {
+      stroke: #61a58a;
+    }
+
+    .feature p {
+      margin: 0;
+      font-size: 12.3px;
+      line-height: 1.2;
+      font-weight: 760;
+      letter-spacing: -.018em;
+      color: #24386f;
+      white-space: nowrap;
+    }
+
+    /* DASHBOARD */
+    .dashboard-shell {
+      right: 90px;
+      position: absolute;
+      top: 15px;
+      width: 850px;
+      height: 542px;
+      border-radius: 21px;
+      background: rgba(255, 255, 255, .98);
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 22px 55px rgba(44, 63, 116, .11), 0 5px 18px rgba(44, 63, 116, .07), inset 0 0 0 1px rgba(237, 242, 249, .8);
+      transform-origin: top left;
+      transform: scale(.995);
+      filter: hue-rotate(20deg);
+    }
+
+    .sidebar {
+      width: 83px;
+      padding: 23px 0;
+      background: rgba(255, 255, 255, .94);
+      border-right: 1px solid #f0f3fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      margin-bottom: 37px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .logo:after {
+      display: none;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav {
+      display: grid;
+      gap: 28px;
+      color: #5371d8;
+    }
+
+    .nav svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.15;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 4px 5px rgba(60, 93, 203, .13));
+    }
+
+    .main {
+      flex: 1;
+      padding: 29px 44px 32px 43px;
+      background: linear-gradient(180deg, #fff 0%, #fcfdff 100%);
+    }
+
+    .header {
+      margin-bottom: 19px;
+    }
+
+    .header h2 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 820;
+      letter-spacing: -.028em;
+      color: #223775;
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 9.5px;
+      font-weight: 760;
+      color: #536394;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(236, 241, 248, .94);
+      border-radius: 9px;
+      box-shadow: 0 10px 25px rgba(48, 68, 120, .065), 0 3px 10px rgba(48, 68, 120, .04);
+    }
+
+    .stat-card {
+      height: 72px;
+      padding: 17px 14px;
+    }
+
+    .stat-label {
+      font-size: 8.8px;
+      font-weight: 800;
+      color: #61719e;
+      margin-bottom: 10px;
+      white-space: nowrap;
+    }
+
+    .stat-value {
+      font-size: 19px;
+      line-height: 1;
+      font-weight: 780;
+      letter-spacing: -.04em;
+      color: #20346f;
+      white-space: nowrap;
+    }
+
+    .grid-main {
+      display: grid;
+      grid-template-columns: 1.16fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .large-card {
+      height: 183px;
+      padding: 14px 17px 13px;
+    }
+
+    .card-title {
+      margin: 0 0 3px;
+      font-size: 10.2px;
+      font-weight: 850;
+      letter-spacing: -.02em;
+      color: #20346f;
+    }
+
+    .card-subtitle {
+      margin: 0;
+      font-size: 8.6px;
+      font-weight: 800;
+      color: #5d6d9b;
+    }
+
+    .chart {
+      height: 124px;
+      margin-top: 14px;
+      position: relative;
+    }
+
+    .chart svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .axis-label,
+    .day-label {
+      font-size: 8px;
+      font-weight: 800;
+      fill: #6a78a2;
+    }
+
+    .chart-percent {
+      position: absolute;
+      right: 3px;
+      top: -8px;
+      color: #27c789;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .confidence {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .donut-wrap {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      margin-top: -8px;
+    }
+
+    .donut {
+      width: 103px;
+      height: 103px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .donut svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg)
+    }
+
+    .donut-bg {
+      fill: none;
+      stroke: #f0f3f9;
+      stroke-width: 14;
+    }
+
+    .donut-progress {
+      fill: none;
+      stroke: url(#donutGradient);
+      stroke-width: 14;
+      stroke-linecap: butt;
+      stroke-dasharray: 82 100;
+    }
+
+    .donut-value {
+      font-size: 21px;
+      font-weight: 470;
+      color: #26bf87;
+      letter-spacing: -.045em;
+    }
+
+    .donut-caption {
+      font-size: 9px;
+      font-weight: 900;
+      color: #20346f;
+      text-align: center;
+      margin-top: 0px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.6fr;
+      gap: 14px;
+    }
+
+    .small-card,
+    .sessions {
+      height: 160px;
+      padding: 14px 17px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 21px;
+    }
+
+    .pill {
+      padding: 7px 9px;
+      border-radius: 6px;
+      font-size: 7.3px;
+      font-weight: 900;
+      color: #244070;
+      box-shadow: 0 6px 13px rgba(73, 106, 160, .04);
+    }
+
+    .blue {
+      background: #dff5ff
+    }
+
+    .green-pill {
+      background: #caf2dc
+    }
+
+    .mint-pill {
+      background: #d8f7df
+    }
+
+    .orange {
+      background: #ffe2d2
+    }
+
+    .pink {
+      background: #ffd6ef
+    }
+
+    .session-list {
+      margin-top: 13px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .session {
+      display: grid;
+      grid-template-columns: 28px 1fr 18px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .session-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e8fbf3;
+      display: grid;
+      place-items: center;
+      color: #23bd88;
+      box-shadow: inset 0 0 0 1px rgba(32, 193, 135, .08);
+    }
+
+    .session-icon svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .session-title {
+      margin: 0 0 3px;
+      font-size: 8.2px;
+      line-height: 1.12;
+      font-weight: 900;
+      color: #20346f;
+      letter-spacing: -.01em;
+    }
+
+    .session-time {
+      margin: 0;
+      font-size: 7.1px;
+      font-weight: 800;
+      color: #707da6;
+    }
+
+    .check {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #2ec28e;
+      color: #2ec28e;
+      display: grid;
+      place-items: center;
+    }
+
+    .check svg {
+      width: 8px;
+      height: 8px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width:1270px) {
+      .composition {
+        transform: scale(calc(100vw / 1270));
+        transform-origin: top left;
+        margin-bottom: calc((100vw / 1270) * -0px);
+      }
+    }
+
+    .subjects-grid-wrapper {
+      display: block;
+      height: 1000px;
+      position: relative;
+      top: 50px;
+      max-width: 1250px;
+      width: 100%;
+    }
+
+    .subjects-grid .sticky {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px 22px;
+      width: 100%;
+    }
+
+    .about-section {
+      width: min(1194px, 100vw);
+      display: grid;
+      grid-template-columns: 277px 497px 248px;
+      column-gap: 27px;
+      align-items: start;
+      padding: 0 0 140px;
+    }
+
+    .about-copy {
+      padding-top: 6px;
+    }
+
+    .heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--blue-900);
+      font-size: 42px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .sparkles {
+      width: 25px;
+      height: 34px;
+      margin-top: -3px;
+      flex: 0 0 auto;
+    }
+
+    .about-copy p {
+      width: 360px;
+      max-width: none;
+      color: #254c82;
+      font-size: 12.8px;
+      line-height: 1.95;
+      font-weight: 700;
+      letter-spacing: -0.012em;
+    }
+
+    .about-copy p+p {
+      margin-top: 12px;
+    }
+
+    .map-wrap {
+      height: 295px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 0;
+      transform: scale(1.2) !important;
+    }
+
+    .world-map {
+      width: 480px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(1.04);
+    }
+
+    .team-card {
+      width: 248px;
+      min-height: 327px;
+      padding: 27px 28px 24px;
+      border-radius: 18px;
+      background: white;
+      box-shadow:
+        0 18px 42px rgba(58, 75, 116, 0.11),
+        0 4px 15px rgba(71, 94, 136, 0.06);
+      color: var(--blue-700);
+      z-index: 1;
+    }
+
+    .team-card h2 {
+      max-width: 178px;
+      color: var(--blue-900);
+      font-size: 15px;
+      line-height: 1.42;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .team-card .description {
+      max-width: 190px;
+      margin-top: 19px;
+      color: var(--blue-600);
+      font-size: 10.8px;
+      line-height: 1.65;
+      font-weight: 700;
+      letter-spacing: -0.018em;
+    }
+
+    .avatars {
+      display: flex;
+      align-items: center;
+      height: 43px;
+      margin: 18px 0 0 -5px;
+    }
+
+    .avatar {
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 1.5px solid #ffffff;
+      background: #d7edf1;
+      box-shadow: 0 4px 9px rgba(31, 67, 110, 0.1);
+    }
+
+    .avatar+.avatar {
+      margin-left: -4px;
+    }
+
+    .avatar svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .location {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 25px;
+      color: #2a5c92;
+    }
+
+    .pin-wrap {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 37px;
+      border-radius: 50%;
+      background: #e9faf8;
+    }
+
+    .pin {
+      width: 20px;
+      height: 20px;
+    }
+
+    .location-text {
+      color: #2b578c;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    @media (max-width: 980px) {
+      body {
+        place-items: start center;
+      }
+
+      .about-section {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        row-gap: 26px;
+        padding: 34px 26px;
+      }
+
+      .about-copy p {
+        width: auto;
+        max-width: 540px;
+      }
+
+      .map-wrap {
+        height: auto;
+        justify-content: flex-start;
+      }
+
+      .world-map {
+        width: min(100%, 640px);
+      }
+
+      .team-card {
+        width: min(100%, 360px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .about-section {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .team-card {
+        border-radius: 16px;
+      }
+    }
+
+
+    .cta-button {
+      width: min(360px, 86vw);
+      height: 72px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #06419a 0%, #003584 100%);
+      color: #ffffff;
+      font-size: clamp(18px, 1.45vw, 23px);
+      font-weight: 780;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+
+      box-shadow:
+        0 8px 18px rgba(0, 45, 130, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-button span {
+      transform: translateY(-1px);
+    }
+
+    .cta-button svg {
+      width: 28px;
+      height: 28px;
+      stroke-width: 2.4;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 28px 18px;
+      }
+
+      .cta-card {
+        min-height: 230px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        letter-spacing: 0.035em;
+      }
+
+      .cta-button {
+        height: 62px;
+        gap: 18px;
+      }
+    }
+
+
+    .section {
+      width: 100%;
+      padding: 0 42px 46px 46px;
+    }
+
+    .cta-card {
+      width: 100%;
+      min-height: 288px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      background-image: url("c051d853-0625-4713-a36c-e85839d9a412.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      mix-blend-mode: multiply;
+      background-attachment: fixed;
+      box-shadow: -340px 80px 80px rgb(255 255 255 / 100%) inset;
+    }
+
+    .cta-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(255, 255, 255, 0.08),
+          rgba(255, 255, 255, 0.18) 45%,
+          rgba(255, 255, 255, 0.04));
+      pointer-events: none;
+    }
+
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      transform: translateY(-2px);
+      padding: 24px;
+    }
+
+    .cta-content p {
+      margin: 20px;
+    }
+
+    /* ─── RESPONSIVE LAYOUT PASS ───────────────────────────────── */
+    html {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      width: 100%;
+      display: block;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+
+    body * {
+      min-width: 0;
+    }
+
+    .features .feature {
+      display: flex;
+      grid-template-columns: none;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .feature-list .feature {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      align-items: center;
+      gap: 15px;
+    }
+
+    .trust .avatar {
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      margin-left: -8px;
+      border: 3px solid #f7fbfa;
+      background: #ddd;
+    }
+
+    .trust .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .team-card .avatar {
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      margin-left: 0;
+      border: 1.5px solid #ffffff;
+      background: #d7edf1;
+    }
+
+    .team-card .avatar+.avatar {
+      margin-left: -4px;
+    }
+
+    .app .title-row {
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 22px;
+      font-size: 12px;
+    }
+
+    .parents-copy .title-row {
+      align-items: flex-start;
+      gap: 11px;
+      margin-bottom: 15px;
+    }
+
+    .app .intro {
+      margin: 0 0 13px;
+      max-width: none;
+      font-size: 11px;
+      line-height: normal;
+      color: #1c286d;
+    }
+
+    .parents-copy .intro {
+      margin: 0 0 27px;
+      max-width: 285px;
+      font-size: 14px;
+      line-height: 1.72;
+      color: #273a71;
+    }
+
+    .site-header-inner {
+      left: 50%;
+      width: min(1240px, calc(100% - 48px));
+      transform: translateX(-50%);
+    }
+
+    .site-nav {
+      margin-left: clamp(24px, 5vw, 78px);
+      gap: clamp(18px, 3vw, 42px);
+    }
+
+    .hero-wrapper {
+      width: 100%;
+      height: auto;
+      min-height: clamp(660px, 58vw, 760px);
+      padding: clamp(96px, 10vw, 122px) clamp(24px, 6vw, 108px) 76px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 530px) minmax(360px, 520px);
+      align-items: start;
+      justify-content: space-between;
+      gap: clamp(28px, 6vw, 86px);
+      width: min(1200px, 100%);
+      height: auto;
+      margin: 0 auto;
+      overflow: visible;
+    }
+
+    .hero::before {
+      inset: -5px -70px -20px clamp(300px, 36vw, 430px);
+      pointer-events: none;
+    }
+
+    .left {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: 100%;
+      height: auto;
+      padding-top: 0;
+    }
+
+    .left h1 {
+      font-size: clamp(38px, 5vw, 64px);
+      width: max-content;
+      padding-top: 60px;
+    }
+
+    .features {
+      grid-template-columns: repeat(3, minmax(0, max-content));
+      max-width: 100%;
+    }
+
+    .actions {
+      flex-wrap: wrap;
+    }
+
+    .visual {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: min(100%, 520px);
+      height: 560px;
+      justify-self: end;
+      transform: none;
+    }
+
+    .app {
+      position: relative;
+    }
+
+    .app>.sidebar {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 71px;
+      padding: 24px 0 0;
+      border-right: 1px solid rgba(232, 236, 255, .86);
+      gap: 22px;
+    }
+
+    .dashboard-shell>.sidebar {
+      position: relative;
+      inset: auto;
+      width: 83px;
+      padding: 23px 0;
+      border-right: 1px solid #f0f3fa;
+      gap: 0;
+      flex: 0 0 83px;
+    }
+
+    .steps-section-wrapper,
+    .subjects-grid-wrapper {
+      width: min(1250px, calc(100% - 48px));
+      height: auto;
+      top: auto;
+      margin: 0 auto;
+      padding: clamp(58px, 8vw, 118px) 0;
+    }
+
+    .steps-section,
+    .subjects-grid {
+      height: auto;
+      top: auto;
+      padding: 0;
+    }
+
+    .steps-section>.sticky,
+    .subjects-grid .sticky {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      align-items: stretch;
+    }
+
+    .steps-section>.sticky {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(18px, 2.5vw, 30px);
+    }
+
+    .step-card {
+      width: 100%;
+      min-height: 278px;
+      height: auto;
+    }
+
+    .arrow {
+      display: none;
+    }
+
+    .subjects-grid .sticky {
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .subject-card {
+      min-height: 128px;
+      height: auto;
+      aspect-ratio: 1.45;
+    }
+
+    .composition {
+      width: min(1200px, calc(100% - 48px));
+      height: auto;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(260px, 345px) minmax(0, 850px);
+      gap: clamp(28px, 5vw, 58px);
+      align-items: center;
+      margin: 0 auto clamp(80px, 10vw, 140px);
+      transform: none !important;
+    }
+
+    .parents-copy,
+    .dashboard-shell {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+    }
+
+    .parents-copy {
+      width: 100%;
+    }
+
+    .parents-copy .feature {
+      grid-template-columns: 28px minmax(0, 1fr);
+    }
+
+    .parents-copy .feature p {
+      white-space: normal;
+    }
+
+    .dashboard-shell {
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      min-height: 542px;
+      transform: none;
+      transform-origin: center;
+    }
+
+    .dashboard-shell .main {
+      min-width: 0;
+    }
+
+    .about-section {
+      width: min(1194px, calc(100% - 48px));
+      grid-template-columns: minmax(220px, 290px) minmax(260px, 497px) minmax(220px, 248px);
+    }
+
+    .about-copy p {
+      width: auto;
+      max-width: 350px;
+    }
+
+    .section {
+      padding-inline: clamp(18px, 4vw, 42px);
+    }
+
+    .cta-card {
+      background-attachment: scroll;
+      box-shadow: clamp(-340px, -20vw, -120px) 80px 80px rgb(255 255 255 / 100%) inset;
+    }
+
+    .cta-content h1 {
+      font-size: clamp(30px, 5vw, 42px);
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+      }
+
+      .visual {
+        transform: scale(.86);
+        transform-origin: top right;
+        margin-bottom: -78px;
+      }
+
+      .dashboard-shell .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .dashboard-shell .bottom-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .dashboard-shell .sessions {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .site-header-inner {
+        width: min(720px, calc(100% - 32px));
+      }
+
+      .site-nav {
+        display: none;
+      }
+
+      .hero-wrapper {
+        min-height: 0;
+        padding: 96px 24px 44px;
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 34px;
+      }
+
+      .hero::before {
+        inset: 280px -360px auto -150px;
+        height: 620px;
+        background-size: 920px 620px;
+        opacity: .72;
+      }
+
+      .left {
+        max-width: 620px;
+
+      }
+
+      .features {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: min(100%, 560px);
+      }
+
+      .visual {
+        width: 520px;
+        height: 482px;
+        transform: scale(.86);
+        transform-origin: top left;
+        margin-bottom: 0;
+      }
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper {
+        width: min(720px, calc(100% - 40px));
+        padding: 56px 0;
+      }
+
+      .steps-section>.sticky {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .subjects-grid .sticky {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .composition {
+        width: min(720px, calc(100% - 40px));
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .parents-copy {
+        max-width: 560px;
+      }
+
+      .dashboard-shell {
+        max-width: 100%;
+        min-height: 0;
+      }
+
+      .dashboard-shell .main {
+        padding: 24px;
+      }
+
+      .dashboard-shell .grid-main,
+      .dashboard-shell .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-section {
+        width: min(720px, calc(100% - 40px));
+        padding-inline: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-header {
+        height: 62px;
+      }
+
+      .site-header-inner {
+        left: 16px;
+        right: 16px;
+        width: auto;
+        height: 62px;
+        transform: none;
+      }
+
+      .brand img {
+        width: 82px;
+      }
+
+      .header-actions {
+        gap: 12px;
+        font-size: 12px;
+      }
+
+      .header-actions a:first-child {
+        display: none;
+      }
+
+      .header-cta {
+        width: 44px;
+        min-width: 44px;
+        height: 40px;
+        padding: 0;
+        gap: 0;
+        font-size: 0;
+      }
+
+      .header-cta span {
+        font-size: 17px;
+      }
+
+      .hero-wrapper {
+        padding: 86px 18px 34px;
+      }
+
+      .left h1 {
+        width: auto;
+        max-width: 100%;
+        font-size: clamp(31px, 9vw, 38px);
+        line-height: 1.12;
+      }
+
+      .subtitle br,
+      .parents-copy .intro br,
+      .about-copy p br,
+      .team-card br {
+        display: none;
+      }
+
+      .subtitle {
+        max-width: 100%;
+        font-size: 14px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .feature span {
+        font-size: 12.5px;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .btn,
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .trust {
+        align-items: flex-start;
+      }
+
+      .visual {
+        width: min(520px, calc(100vw - 36px));
+        height: 370px;
+        transform: scale(.66);
+      }
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper,
+      .composition,
+      .about-section {
+        width: calc(100% - 32px);
+      }
+
+      .step-card {
+        padding-inline: 22px;
+      }
+
+      .question-box,
+      .validation-box,
+      .explanation-box {
+        left: 22px;
+        right: 22px;
+      }
+
+      .validation-box {
+        gap: 12px;
+        padding-inline: 14px;
+      }
+
+      .progress {
+        width: min(132px, 100%);
+      }
+
+      .subjects-grid .sticky {
+        grid-template-columns: 1fr;
+      }
+
+      .subject-card {
+        aspect-ratio: auto;
+        min-height: 118px;
+      }
+
+      .parents-copy h1 {
+        font-size: clamp(30px, 9vw, 38px);
+      }
+
+      .dashboard-shell {
+        display: block;
+        border-radius: 18px;
+      }
+
+      .dashboard-shell>.sidebar {
+        display: none;
+      }
+
+      .dashboard-shell .main {
+        padding: 20px;
+      }
+
+      .dashboard-shell .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card,
+      .large-card,
+      .small-card,
+      .sessions {
+        height: auto;
+        min-height: 78px;
+      }
+
+      .chart {
+        height: 150px;
+      }
+
+      .about-section {
+        row-gap: 30px;
+      }
+
+      .map-wrap {
+        justify-content: center;
+      }
+
+      .team-card {
+        width: 100%;
+        max-width: none;
+      }
+
+      .section {
+        padding: 0 16px 32px;
+      }
+
+      .cta-card {
+        min-height: 240px;
+        border-radius: 22px;
+        box-shadow: -120px 70px 70px rgb(255 255 255 / 95%) inset;
+      }
+
+      .cta-button {
+        width: min(100%, 320px);
+        height: 58px;
+        font-size: 17px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .header-actions a:first-child {
+        display: none;
+      }
+
+      .hero::before {
+        inset: 320px -430px auto -220px;
+      }
+
+      .visual {
+        height: 330px;
+        transform: scale(.59);
+      }
+
+      .step-card {
+        padding: 32px 18px 18px;
+      }
+
+      .line {
+        width: 70px;
+      }
+
+      .line.small {
+        width: 54px;
+      }
+
+      .sparkle-circle {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .visual {
+        height: 308px;
+        transform: scale(.55);
+      }
+    }
+
+    /* ─── SECTION-STICKY CARDS ─────────────────────────────────── */
+    @media (min-width: 901px) {
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper,
+      .composition,
+      .about-section,
+      .section {
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: calc(100vh);
+        min-height: calc(100svh);
+      }
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper,
+      .section {
+        display: block;
+      }
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper {
+        padding: 0;
+      }
+
+      .steps-section,
+      .subjects-grid {
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: calc(100vh);
+        min-height: calc(100svh);
+        display: block;
+        position: relative;
+      }
+
+      .steps-section>.sticky,
+      .subjects-grid .sticky {
+        position: relative;
+        top: auto;
+        left: 0;
+        width: 100%;
+        height: fit-content;
+        z-index: 2;
+        padding: 140px 0;
+        align-self: auto;
+      }
+
+      .parents-copy,
+      .dashboard-shell,
+      .team-card,
+      .cta-card {
+        position: relative;
+        top: auto;
+        align-self: start;
+      }
+
+      .parents-copy,
+      .dashboard-shell,
+      .team-card {
+        margin-top: 0;
+      }
+
+      .steps-section>.sticky {
+        display: grid;
+        grid-template-columns: repeat(3, 304px);
+        justify-content: space-between;
+        gap: 0;
+      }
+
+      .step-card {
+        width: 304px;
+        height: 278px;
+        min-height: 278px;
+      }
+
+      .subjects-grid .sticky {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px 22px;
+      }
+
+      .subject-card {
+        height: 128px;
+        min-height: 128px;
+        aspect-ratio: auto;
+      }
+
+      .composition {
+        width: min(1200px, calc(100% - 48px));
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: calc(100vh);
+        min-height: calc(100svh);
+        align-items: start;
+        padding-top: 140px;
+      }
+
+      .dashboard-shell {
+        width: 850px;
+        height: 542px;
+        min-height: 542px;
+      }
+
+      .about-section {
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: calc(100vh);
+        min-height: calc(100svh);
+        margin: 0 auto;
+        align-items: start;
+        padding-top: 140px;
+      }
+
+      .team-card {
+        width: 248px;
+      }
+
+      .section {
+        padding-top: 140px;
+        padding-bottom: 140px;
+      }
+
+      .cta-card {
+        width: 100%;
+        min-height: 288px;
+      }
+
+      .plain-sticky-kit-spacer {
+        display: none;
+        flex: 0 0 auto;
+        pointer-events: none;
+      }
+
+      .is_stuck,
+      .is_bottomed {
+        z-index: 25;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .steps-section>.sticky,
+      .subjects-grid .sticky,
+      .parents-copy,
+      .dashboard-shell,
+      .team-card,
+      .cta-card {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    .site-footer {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      margin: 38px 0 34px;
+    }
+
+    .site-footer:before {
+      content: "";
+      background: #f8fbff;
+      box-shadow: 0 0 360px #f8fbff inset;
+      filter: blur(10px);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      padding: 38px 0 34px;
+      top: -42px;
+    }
+
+    .footer-inner {
+      width: min(1200px, calc(100vw - 72px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 250px repeat(4, 1fr);
+      gap: 46px;
+      align-items: start;
+    }
+
+    .footer-brand img {
+      width: 116px;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p,
+    .footer-col a,
+    .copyright {
+      color: #17386d;
+      font-size: 11px;
+      line-height: 1.7;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-col {
+      display: grid;
+      gap: 5px;
+    }
+
+    .footer-col h3 {
+      margin: 0 0 11px;
+      color: #0b3472;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .socials {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .socials span {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #edf6ff;
+      color: #0a438d;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 980px) {
+      .site-nav {
+        display: none;
+      }
+
+      .site-header {
+        position: relative;
+        top: 0;
+        background: var(--bg);
+        padding: 16px 0;
+      }
+
+      .hero-wrapper,
+      .hero {
+        height: 980px;
+      }
+
+      .hero-left {
+        left: 38px;
+        top: 90px;
+        width: auto;
+        max-width: calc(100vw - 76px);
+      }
+
+      .hero-left h1 {
+        font-size: 54px;
+      }
+
+      .hero-visual {
+        left: 24px;
+        top: 450px;
+      }
+
+      .steps-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 44px;
+      }
+
+      .step-arrow {
+        display: none;
+      }
+
+      .subjects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .parents-composition {
+        min-height: 920px;
+      }
+
+      .dashboard-shell {
+        right: auto;
+        left: 0;
+        top: 360px;
+        transform: scale(.76);
+        transform-origin: top left;
+      }
+
+      .about-section {
+        grid-template-columns: 1fr;
+        row-gap: 26px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .cta-band h2 {
+        font-size: 26px;
+      }
+    }
+
+    @media (min-width: 721px) and (max-width: 980px) {
+      .site-header {
+        position: absolute;
+        top: 18px;
+        background: transparent;
+        padding: 0;
+      }
+
+      .site-nav {
+        display: flex;
+        gap: 27px;
+        margin-left: 62px;
+        font-size: 10px;
+      }
+
+      .hero-wrapper,
+      .hero {
+        height: 548px;
+      }
+
+      .hero-left {
+        left: 58px;
+        top: 98px;
+        width: 320px;
+      }
+
+      .hero-left h1 {
+        font-size: 52px;
+        line-height: .99;
+      }
+
+      .hero-visual {
+        left: 449px;
+        top: 112px;
+        transform: scale(.73);
+        transform-origin: top left;
+      }
+
+      .steps-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0;
+      }
+
+      .step-arrow {
+        display: block;
+      }
+
+      .step-card {
+        width: 194px;
+        flex: 0 0 194px;
+        min-height: 191px;
+        padding: 25px 20px 12px;
+        border-radius: 12px;
+      }
+
+      .step-badge {
+        top: -12px;
+        width: 25px;
+        height: 25px;
+        font-size: 9px;
+      }
+
+      .step-card h3 {
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .step-card p {
+        font-size: 7.7px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 11px 12px;
+      }
+
+      .subject-card {
+        height: 75px;
+        border-radius: 8px;
+      }
+
+      .subject-card svg {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 9px;
+      }
+
+      .subject-card span {
+        font-size: 9.2px;
+      }
+
+      .parents-composition {
+        min-height: 330px;
+      }
+
+      .parents-copy {
+        top: 28px;
+        width: 260px;
+      }
+
+      .parents-copy h2 {
+        font-size: 25px;
+      }
+
+      .dashboard-shell {
+        left: 260px;
+        right: auto;
+        top: 0;
+        transform: scale(.64);
+        transform-origin: top left;
+      }
+
+      .about-section {
+        grid-template-columns: 198px 392px 150px;
+        column-gap: 4px;
+      }
+
+      .about-copy h1 {
+        font-size: 24px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 190px repeat(4, 1fr);
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-features {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    .section-heading {
+      text-align: center;
+      color: #102f70;
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+
+    .steps-section .section-heading {
+      margin-bottom: -80px;
+    }
+
+    .sparkle-text {
+      margin-left: 8px;
+      color: #35c6c2;
+      font-size: 24px;
+      vertical-align: 7px;
+    }
+
+    .section-heading {
+      text-align: center;
+      color: #102f70;
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+
+    .sparkle-text {
+      margin-left: 8px;
+      color: #35c6c2;
+      font-size: 24px;
+      vertical-align: 7px;
+    }
+
+    .section-kicker {
+      margin: 10px auto 0;
+      text-align: center;
+      color: #18386e;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .subjects-heading {
+      margin-bottom: -80px;
+    }
+
+    .step-card,
+    .subject-card,
+    .card,
+    .team-card,
+    .cta-card,
+    .float-card,
+    .equation-card {
+      --hover-y: 0px;
+      --hover-scale: 1;
+      transform: translateY(var(--reveal-y, 0px)) translateY(var(--hover-y)) scale(var(--hover-scale));
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
+      will-change: transform;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+
+      .step-card:hover,
+      .subject-card:hover,
+      .card:hover,
+      .team-card:hover,
+      .cta-card:hover,
+      .float-card:hover,
+      .equation-card:hover {
+        --hover-y: -6px;
+        --hover-scale: 1.025;
+        box-shadow:
+          0 24px 46px rgba(21, 34, 82, .14),
+          0 10px 24px rgba(21, 34, 82, .10),
+          inset 0 0 0 1px rgba(255, 255, 255, .9);
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        --reveal-y: 28px;
+        opacity: 0;
+        transform: translateY(var(--reveal-y)) translateY(var(--hover-y, 0px)) scale(var(--hover-scale, 1));
+        transition:
+          opacity .7s ease,
+          transform .7s cubic-bezier(.2, .7, .2, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+
+      .reveal.is-visible {
+        --reveal-y: 0px;
+        opacity: 1;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .steps-section>.sticky {
+        position: relative;
+      }
+
+      .steps-section .arrow {
+        display: block;
+        position: absolute;
+        top: 280px;
+        width: 65px;
+        height: 28px;
+        color: #5f70ff;
+        pointer-events: none;
+        z-index: 4;
+      }
+
+      .steps-section .arrow-1 {
+        left: calc(25% + 44px);
+      }
+
+      .steps-section .arrow-2 {
+        left: calc(75% - 109px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .steps-section .arrow {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-wrapper {
+        padding-top: clamp(74px, 11vw, 88px);
+        padding-bottom: 32px;
+      }
+
+      .hero {
+        gap: 24px;
+      }
+
+      .subtitle {
+        margin: 14px 0 22px;
+      }
+
+      .features {
+        margin-bottom: 24px;
+      }
+
+      .actions {
+        margin-bottom: 22px;
+      }
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper {
+        padding: 44px 0;
+      }
+
+      .steps-section .section-heading,
+      .subjects-heading {
+        margin-bottom: 24px;
+      }
+
+      .steps-section>.sticky {
+        gap: 36px;
+      }
+
+      .composition {
+        padding: 44px 0 52px;
+        margin-bottom: 0;
+        gap: 32px;
+      }
+
+      .about-section {
+        padding: 44px 0 56px;
+      }
+
+      .section {
+        padding: 34px 20px 42px;
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .site-header,
+      .site-header-inner {
+        height: 56px;
+      }
+
+      .hero-wrapper {
+        padding: 68px 18px 24px;
+      }
+
+      .hero {
+        gap: 18px;
+      }
+
+      .features {
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .actions {
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper {
+        padding: 36px 0;
+      }
+
+      .steps-section>.sticky {
+        gap: 30px;
+      }
+
+      .subject-card {
+        min-height: 104px;
+      }
+
+      .composition {
+        padding: 36px 0 44px;
+        gap: 26px;
+      }
+
+      .about-section {
+        padding: 36px 0 44px;
+      }
+
+      .section {
+        padding: 26px 16px 34px;
+      }
+    }
+
+    /* ─── FINAL POLISH SYSTEM ───────────────────────────────────── */
+    :root {
+      --font-sans: Inter, Arial, sans-serif;
+      --page-gutter: clamp(24px, 5vw, 72px);
+      --content-max: 1200px;
+      --fw-copy: 600;
+      --fw-strong: 700;
+      --fw-display: 800;
+    }
+
+    body,
+    button,
+    input,
+    textarea,
+    select {
+      font-family: var(--font-sans);
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    a,
+    button,
+    .section-heading,
+    .section-kicker,
+    .subtitle,
+    .feature span,
+    .trust-text,
+    .step-card h3,
+    .step-card p,
+    .subject-card span,
+    .card-title,
+    .card-subtitle,
+    .stat-label,
+    .stat-value,
+    .session-title,
+    .session-time,
+    .footer-col,
+    .footer-brand {
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    .section-heading,
+    .left h1,
+    .parents-copy h1,
+    .about-copy h1,
+    .cta-content h1 {
+      font-weight: var(--fw-display);
+    }
+
+    h3,
+    .site-nav,
+    .header-actions,
+    .btn,
+    .header-cta,
+    .card-title,
+    .stat-value,
+    .step-card h3,
+    .subject-card span,
+    .trust-text {
+      font-weight: var(--fw-strong);
+    }
+
+    p,
+    li,
+    .subtitle,
+    .section-kicker,
+    .step-card p,
+    .parents-copy .feature p,
+    .about-copy p,
+    .team-card .description,
+    .footer-col a {
+      font-weight: var(--fw-copy);
+    }
+
+    .site-header-inner,
+    .hero,
+    .steps-section-wrapper,
+    .subjects-grid-wrapper,
+    .composition,
+    .about-section,
+    .footer-inner {
+      width: min(var(--content-max), calc(100% - (var(--page-gutter) * 2)));
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-wrapper {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section {
+      width: 100%;
+      padding-left: var(--page-gutter);
+      padding-right: var(--page-gutter);
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --page-gutter: 24px;
+      }
+
+      .site-header-inner,
+      .hero,
+      .steps-section-wrapper,
+      .subjects-grid-wrapper,
+      .composition,
+      .about-section,
+      .footer-inner {
+        width: calc(100% - (var(--page-gutter) * 2));
+      }
+
+      .section {
+        padding-left: var(--page-gutter);
+        padding-right: var(--page-gutter);
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --page-gutter: 18px;
+      }
+
+      .site-header-inner {
+        left: var(--page-gutter);
+        right: var(--page-gutter);
+        width: auto;
+      }
+    }
+
+    /* ─── DYSLEXIA-FIRST HERO REDESIGN ─────────────────────────── */
+    :root {
+      --ink: #102f5f;
+      --copy: #2f456f;
+      --paper: #fffdf8;
+      --line: #dfe9f6;
+      --sun: #ffd66f;
+      --mint: #5fd4bc;
+      --sky: #69b7ff;
+      --coral: #ff8d78;
+    }
+
+    body {
+      background: #f8fbff;
+      background-image: none;
+      background-attachment: scroll;
+    }
+
+    .hero-wrapper {
+      min-height: clamp(690px, 64vw, 790px);
+      padding-top: clamp(112px, 10vw, 132px);
+    }
+
+    .hero {
+      grid-template-columns: minmax(0, 540px) minmax(390px, 540px);
+      align-items: center;
+    }
+
+    .hero::before {
+      position: fixed;
+      inset: 0;
+      width: auto;
+      height: auto;
+      background:
+        radial-gradient(circle at 22% 20%, rgba(255, 214, 111, .58), transparent 31%),
+        radial-gradient(circle at 83% 50%, rgba(95, 212, 188, .42), transparent 34%),
+        linear-gradient(110deg, rgba(255, 246, 216, .9) 0%, rgba(246, 252, 255, .84) 48%, rgba(238, 250, 245, .9) 100%);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero-kicker {
+      width: fit-content;
+      margin: 0 0 18px;
+      padding: 9px 13px;
+      border: 1px solid rgba(90, 146, 197, .26);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .78);
+      color: #23456f;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(67, 105, 152, .08);
+    }
+
+    .left h1 {
+      width: auto;
+      max-width: 540px;
+      padding-top: 0;
+      color: var(--ink);
+      font-size: clamp(44px, 5.4vw, 68px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .highlight-clear {
+      position: relative;
+      display: inline-block;
+      padding: 0 .04em;
+      z-index: 0;
+    }
+
+    .highlight-clear::after {
+      content: "";
+      position: absolute;
+      left: -.02em;
+      right: -.02em;
+      bottom: .08em;
+      height: .34em;
+      border-radius: 999px;
+      background: rgba(255, 214, 111, .74);
+      z-index: -1;
+    }
+
+    .subtitle {
+      max-width: 470px;
+      margin: 22px 0 26px;
+      color: var(--copy);
+      font-size: 18px;
+      line-height: 1.75;
+      font-weight: 600;
+    }
+
+    .features {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      width: min(100%, 520px);
+      margin-bottom: 32px;
+      filter: none;
+    }
+
+    .features .feature {
+      min-height: 96px;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 15px 14px;
+      border: 1px solid rgba(56, 101, 151, .14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .76);
+      box-shadow: 0 12px 30px rgba(66, 102, 146, .08);
+    }
+
+    .icon-circle {
+      width: 34px;
+      height: 34px;
+      flex-basis: 34px;
+      border-radius: 8px;
+      background: #eef8ff;
+    }
+
+    .icon-circle svg {
+      width: 19px;
+      height: 19px;
+      stroke: #1969a9;
+    }
+
+    .feature span {
+      color: #223a62;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .btn {
+      min-height: 48px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      width: 220px;
+      background: #0b4a9f;
+      box-shadow: 0 12px 24px rgba(11, 74, 159, .18);
+    }
+
+    .btn-secondary {
+      width: 184px;
+      background: #ffffff;
+      border-color: #b5d4f1;
+      color: #123d71;
+    }
+
+    .trust {
+      gap: 14px;
+    }
+
+    .stars {
+      color: #d78a00;
+      letter-spacing: 2px;
+    }
+
+    .trust-text {
+      max-width: 300px;
+      color: #2d466f;
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .visual {
+      height: 570px;
+    }
+
+    .app {
+      width: 456px;
+      height: 512px;
+      border: 1px solid rgba(104, 145, 188, .18);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 30px 70px rgba(53, 85, 130, .16);
+    }
+
+    .app .sidebar {
+      width: 70px;
+      background: #f5faff;
+      border-right-color: rgba(96, 139, 183, .18);
+    }
+
+    .app .content {
+      left: 102px;
+      top: 38px;
+      width: 318px;
+    }
+
+    .app .title-row {
+      justify-content: space-between;
+      margin-bottom: 18px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .reader-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .focus-line {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background:
+        repeating-linear-gradient(to bottom, transparent 0 34px, rgba(105, 183, 255, .12) 34px 36px),
+        #ffffff;
+      box-shadow: 0 14px 30px rgba(54, 86, 126, .09);
+    }
+
+    .focus-line p {
+      margin: 0;
+      color: #193a69;
+      font-size: 20px;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    .reading-window {
+      display: inline;
+      padding: 3px 5px;
+      border-radius: 6px;
+      background: rgba(255, 214, 111, .58);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .syllable-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .syllable {
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(83, 130, 176, .16);
+      border-radius: 10px;
+      color: #17385f;
+      background: #f8fbff;
+      font-size: 17px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .syllable:nth-child(1) {
+      border-top: 5px solid var(--sky);
+    }
+
+    .syllable:nth-child(2) {
+      border-top: 5px solid var(--mint);
+    }
+
+    .syllable:nth-child(3) {
+      border-top: 5px solid var(--coral);
+    }
+
+    .support-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .support-item {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      background: #f7fbff;
+      color: #24446d;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .support-dot {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0d6aa5;
+      box-shadow: inset 0 0 0 1px rgba(93, 139, 183, .18);
+    }
+
+    .float-card {
+      top: 300px;
+      width: 156px;
+      height: 150px;
+      border-radius: 14px;
+      color: #17385f;
+    }
+
+    .sparkle-icon {
+      color: #0b4a9f;
+      background: #fff6d8;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+    }
+
+    .float-text {
+      top: 68px;
+      right: 20px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .heart {
+      display: none;
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 456px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-wrapper {
+        padding-top: 92px;
+      }
+
+      .hero {
+        align-items: stretch;
+      }
+
+      .hero::before {
+        inset: 0;
+      }
+
+      .visual {
+        width: 456px;
+        height: 510px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-wrapper {
+        padding-top: 76px;
+      }
+
+      .hero {
+        width: min(354px, calc(100vw - 36px));
+        max-width: min(354px, calc(100vw - 36px));
+        margin-left: 18px;
+        margin-right: auto;
+        overflow: hidden;
+      }
+
+      .hero-kicker {
+        width: auto;
+        max-width: min(354px, calc(100vw - 36px));
+        font-size: 12px;
+        white-space: normal;
+        overflow-wrap: break-word;
+      }
+
+      .left {
+        width: min(354px, calc(100vw - 36px));
+        max-width: min(354px, calc(100vw - 36px));
+        flex: 0 0 auto;
+      }
+
+      .left h1 {
+        font-size: clamp(34px, 10vw, 42px);
+        max-width: 9.5ch;
+        overflow-wrap: normal;
+      }
+
+      .subtitle {
+        max-width: min(354px, calc(100vw - 36px));
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-wrap: break-word;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .features .feature {
+        min-height: 0;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn,
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .trust {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .trust-text {
+        max-width: 100%;
+      }
+
+      .visual {
+        display: none;
+      }
+
+      .steps-section .section-heading {
+        max-width: min(354px, calc(100vw - 36px));
+        font-size: 30px;
+        line-height: 1.12;
+      }
+    }
+
+    /* ─── PROFESSIONAL MARKETING SECTIONS ──────────────────────── */
+    .marketing-section {
+      position: relative;
+      z-index: 1;
+      width: min(1200px, calc(100% - (var(--page-gutter) * 2)));
+      margin: 0 auto;
+      padding: clamp(54px, 7vw, 88px) 0;
+    }
+
+    .section-intro {
+      max-width: 690px;
+      margin-bottom: 30px;
+    }
+
+    .section-eyebrow {
+      margin: 0 0 12px;
+      color: #0b6b8d;
+      font-size: 13px;
+      line-height: 1.4;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .marketing-section h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(32px, 4.6vw, 52px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-intro p,
+    .proof-quote p,
+    .support-copy p,
+    .faq-item p,
+    .plan-card p {
+      color: var(--copy);
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 600;
+    }
+
+    .outcome-grid,
+    .proof-grid,
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .outcome-card,
+    .proof-quote,
+    .faq-item,
+    .plan-card {
+      border: 1px solid rgba(70, 114, 162, .16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .78);
+      box-shadow: 0 16px 38px rgba(61, 96, 139, .08);
+    }
+
+    .outcome-card {
+      padding: 24px;
+    }
+
+    .metric {
+      display: block;
+      margin-bottom: 8px;
+      color: #0b4a9f;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .outcome-card h3,
+    .support-feature h3,
+    .proof-quote h3,
+    .faq-item h3,
+    .plan-card h3 {
+      margin: 0 0 10px;
+      color: #14345f;
+      font-size: 18px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .outcome-card p,
+    .support-feature p {
+      margin: 0;
+      color: #2f456f;
+      font-size: 14px;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .support-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+      gap: clamp(28px, 6vw, 72px);
+      align-items: center;
+    }
+
+    .support-copy {
+      max-width: 510px;
+    }
+
+    .support-copy p {
+      margin: 18px 0 0;
+    }
+
+    .support-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .support-feature {
+      min-height: 182px;
+      padding: 22px;
+      border: 1px solid rgba(70, 114, 162, .15);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .72);
+    }
+
+    .support-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      background: #eef8ff;
+      color: #0b6b8d;
+      font-weight: 800;
+    }
+
+    .proof-quote {
+      min-height: 242px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .proof-quote p {
+      margin: 0 0 24px;
+    }
+
+    .quote-person {
+      color: #14345f;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 800;
+    }
+
+    .plan-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(320px, .72fr);
+      gap: clamp(24px, 5vw, 56px);
+      align-items: start;
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .faq-item {
+      padding: 22px;
+    }
+
+    .faq-item p,
+    .plan-card p {
+      margin: 0;
+      font-size: 14.5px;
+    }
+
+    .plan-card {
+      padding: 28px;
+      background: rgba(255, 255, 255, .86);
+    }
+
+    .plan-list {
+      display: grid;
+      gap: 12px;
+      margin: 22px 0 26px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .plan-list li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 10px;
+      color: #223a62;
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .plan-list li::before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eaf8f4;
+      box-shadow: inset 0 0 0 2px #38b995;
+    }
+
+    .plan-list li::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 11px;
+      margin: 5px 0 0 8px;
+      border-right: 2px solid #087b67;
+      border-bottom: 2px solid #087b67;
+      transform: rotate(45deg);
+    }
+
+    .plan-card .btn {
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .marketing-section {
+        width: calc(100% - (var(--page-gutter) * 2));
+        padding: 48px 0;
+      }
+
+      .outcome-grid,
+      .proof-grid,
+      .support-layout,
+      .plan-layout,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .support-feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .marketing-section {
+        width: min(354px, calc(100vw - 36px));
+        margin-left: 18px;
+        margin-right: auto;
+        padding: 40px 0;
+      }
+
+      .marketing-section h2 {
+        font-size: 30px;
+      }
+
+      .support-feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── LEGACY SECTION FLOW CLEANUP ──────────────────────────── */
+    .steps-section-wrapper,
+    .subjects-grid-wrapper {
+      height: auto;
+      min-height: auto;
+      top: auto;
+      padding: clamp(46px, 6vw, 76px) 0;
+    }
+
+    .steps-section,
+    .subjects-grid {
+      height: auto;
+      min-height: auto;
+      top: auto;
+      padding: 0;
+      display: block;
+    }
+
+    .steps-section>.sticky,
+    .subjects-grid .sticky {
+      padding: 46px 0 0;
+    }
+
+    .steps-section .section-heading {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 901px) {
+
+      .steps-section-wrapper,
+      .subjects-grid-wrapper,
+      .steps-section,
+      .subjects-grid {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <header class="site-header">
+  </header>
+  <div class="site-header-inner">
+    <a class="brand" href="#top" aria-label="AlgAI home">
+      <img src="logo.png" alt="AlgAI">
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="#outcomes">Results</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#for-parents">For parents</a>
+      <a href="#faq">FAQ</a>
+      <a href="#about">About us</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#get-started">Log in</a>
+      <a class="header-cta" href="#get-started">Get started <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="hero-wrapper">
+    <main class="hero">
+      <section class="left">
+        <p class="hero-kicker">Structured tutoring for students who benefit from clearer text, pacing, and review.</p>
+        <h1>Learning that feels <span class="highlight-clear">clearer</span> than ever.
+        </h1>
+        <p class="subtitle">
+          AlgAI organizes lessons into readable steps, optional audio, and visual cues for students with dyslexia and
+          other reading differences.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <span class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h10M4 18h16"></path>
+              </svg></span>
+            <span>Readable line lengths and spacing</span>
+          </div>
+          <div class="feature">
+            <span class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24">
+                <path d="M4 13h4l6-5v8l-6-5H4z"></path>
+                <path d="M17 9c1.5 1.5 1.5 4.5 0 6"></path>
+              </svg></span>
+            <span>Optional read-aloud for key steps</span>
+          </div>
+          <div class="feature">
+            <span class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24">
+                <path d="M5 5h14v14H5z"></path>
+                <path d="M8 12h8M8 16h5"></path>
+              </svg></span>
+            <span>Visual cues for focus and sequence</span>
+          </div>
+        </div>
+
+        <div class="actions"><button class="btn btn-primary">Start learning for free</button><button
+            class="btn btn-secondary">See how it works <span class="play">▶</span></button></div>
+        <div class="trust">
+          <div class="avatars"><span class="avatar a1"></span><span class="avatar a2"></span><span
+              class="avatar a3"></span></div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="trust-text">Designed for students, families, and educators who want practical learning support.
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="visual" aria-label="Dyslexia-friendly learning preview">
+        <div class="app">
+          <aside class="sidebar">
+            <div class="ai-logo"><img src="logo-collapsed.png" alt="AlgAI"></div>
+            <div class="nav-icon"><svg viewBox="0 0 48 48">
+                <path d="M8 23 24 10l16 13v17H29V29H19v11H8z"></path>
+              </svg></div>
+            <div class="nav-icon cyan"><svg viewBox="0 0 48 48">
+                <path d="M10 14c0-3 2-5 5-5h10c4 0 7 3 7 7v24H17c-4 0-7-3-7-7z"></path>
+                <path d="M32 14h5c3 0 5 2 5 5v21H32"></path>
+              </svg></div>
+            <div class="nav-icon"><svg viewBox="0 0 48 48">
+                <path d="M11 39h27M14 39V27M23 39V16M32 39V8"></path>
+              </svg></div>
+            <div class="nav-icon"><svg viewBox="0 0 48 48">
+                <path d="M10 12h28v22H20l-8 7v-7h-2z"></path>
+              </svg></div>
+            <div class="nav-icon"><svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="6"></circle>
+                <path
+                  d="M24 5v6M24 37v6M5 24h6M37 24h6M10.5 10.5l4.3 4.3M33.2 33.2l4.3 4.3M37.5 10.5l-4.3 4.3M14.8 33.2l-4.3 4.3">
+                </path>
+              </svg></div>
+          </aside>
+          <div class="content">
+            <div class="title-row"><span>Reading support</span><svg class="sound" viewBox="0 0 32 32" fill="none">
+                <path d="M5 13h5l7-6v18l-7-6H5z" fill="currentColor"></path>
+                <path d="M21 11c2 2 2 8 0 10M25 8c4 4 4 12 0 16" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round"></path>
+              </svg></div>
+            <div class="reader-card">
+              <div class="focus-line">
+                <p><span class="reading-window">Photosynthesis</span> helps plants make food from sunlight.</p>
+              </div>
+              <div class="syllable-row" aria-label="Word broken into readable parts">
+                <div class="syllable">pho</div>
+                <div class="syllable">to</div>
+                <div class="syllable">syn</div>
+              </div>
+              <div class="support-list">
+                <div class="support-item"><span class="support-dot">1</span><span>Highlight one idea at a time</span>
+                </div>
+                <div class="support-item"><span class="support-dot">2</span><span>Hear the sentence read aloud</span>
+                </div>
+                <div class="support-item"><span class="support-dot">3</span><span>Review the step again</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="float-card">
+          <div class="sparkle-icon">Aa</div>
+          <div class="float-text">Clear text.<br>Structured steps.<br>Practical review.</div><svg class="heart"
+            viewBox="0 0 48 48">
+            <path d="M24 40S8 30 8 18c0-5 4-9 9-9 3 0 6 2 7 5 1-3 4-5 7-5 5 0 9 4 9 9 0 12-16 22-16 22z"></path>
+          </svg>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <section class="marketing-section outcomes-section" id="outcomes" aria-labelledby="outcomes-title">
+    <div class="section-intro">
+      <p class="section-eyebrow">Why families choose AlgAI</p>
+      <h2 id="outcomes-title">Clearer study sessions with progress families can track.</h2>
+      <p>
+        AlgAI is designed for everyday academic support: clearer explanations, accessible reading tools, and a dashboard
+        that shows what students are practicing.
+      </p>
+    </div>
+
+    <div class="outcome-grid">
+      <article class="outcome-card">
+        <span class="metric">1:1</span>
+        <h3>Individualized explanations</h3>
+        <p>Concepts are broken into smaller steps with language matched to the question and subject.</p>
+      </article>
+      <article class="outcome-card">
+        <span class="metric">24/7</span>
+        <h3>Support outside class</h3>
+        <p>Students can revisit concepts after school, before a quiz, or during homework.</p>
+      </article>
+      <article class="outcome-card">
+        <span class="metric">360</span>
+        <h3>Parent visibility</h3>
+        <p>Progress, strengths, and practice gaps are summarized so families can see where to focus next.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="marketing-section support-section" id="support" aria-labelledby="support-title">
+    <div class="support-layout">
+      <div class="support-copy">
+        <p class="section-eyebrow">Reading accessibility</p>
+        <h2 id="support-title">Readable structure for students who process text differently.</h2>
+        <p>
+          AlgAI uses focused text, clear spacing, audio options, and visual anchors to make lessons easier to scan,
+          follow, and revisit.
+        </p>
+      </div>
+
+      <div class="support-feature-grid">
+        <article class="support-feature">
+          <div class="support-icon">Aa</div>
+          <h3>Legible lesson structure</h3>
+          <p>Lessons use short lines, clear hierarchy, and consistent spacing so each idea is easier to locate.</p>
+        </article>
+        <article class="support-feature">
+          <div class="support-icon">01</div>
+          <h3>Step-by-step reasoning</h3>
+          <p>Problems are unpacked in sequence, making the reasoning easier to inspect and repeat.
+          </p>
+        </article>
+        <article class="support-feature">
+          <div class="support-icon">A</div>
+          <h3>Optional audio</h3>
+          <p>Read-aloud tools can reinforce instructions, definitions, and solution steps.</p>
+        </article>
+        <article class="support-feature">
+          <div class="support-icon">!</div>
+          <h3>Progress checks</h3>
+          <p>Short checks help students confirm what they understand before moving to the next step.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="marketing-section proof-section" id="testimonials" aria-labelledby="proof-title">
+    <div class="section-intro">
+      <p class="section-eyebrow">Practical use cases</p>
+      <h2 id="proof-title">For students, parents, and educators who need a clearer study workflow.</h2>
+    </div>
+
+    <div class="proof-grid">
+      <article class="proof-quote">
+        <p>Students can review a concept in smaller parts before continuing with homework or test preparation.</p>
+        <div class="quote-person">For independent practice</div>
+      </article>
+      <article class="proof-quote">
+        <p>Parents can see study activity, completed lessons, strengths, and areas that may need more review.</p>
+        <div class="quote-person">For family visibility</div>
+      </article>
+      <article class="proof-quote">
+        <p>Educators and learning coaches can use the structure to support follow-up practice between sessions.</p>
+        <div class="quote-person">For guided support</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="marketing-section plan-section" id="faq" aria-labelledby="faq-title">
+    <div class="plan-layout">
+      <div>
+        <div class="section-intro">
+          <p class="section-eyebrow">Questions before you start</p>
+          <h2 id="faq-title">Key details before starting.</h2>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Is AlgAI only for reading?</h3>
+            <p>No. Students can use it across reading, math, science, languages, writing, and coding.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Does it replace a teacher?</h3>
+            <p>No. It supports practice between classes by making explanations easier to revisit.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can parents see progress?</h3>
+            <p>Yes. The dashboard highlights completed lessons, study time, strengths, and areas to review.
+            </p>
+          </article>
+          <article class="faq-item">
+            <h3>How does it support students with dyslexia?</h3>
+            <p>It emphasizes readable layouts, audio options, focus cues, and step-based learning.</p>
+          </article>
+        </div>
+      </div>
+
+      <aside class="plan-card" aria-label="Starter plan summary">
+        <h3>Start with a clearer study workflow</h3>
+        <p>Use AlgAI for the core tasks families request most.</p>
+        <ul class="plan-list">
+          <li>Personal AI tutoring across core subjects</li>
+          <li>Reading accessibility and focus tools</li>
+          <li>Parent dashboard for progress and review</li>
+          <li>Free start from this page</li>
+        </ul>
+        <a class="btn btn-primary" href="#get-started">Get started for free</a>
+      </aside>
+    </div>
+  </section>
+
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#28d0b8"></stop>
+        <stop offset="100%" stop-color="#1ea4b9"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="steps-section-wrapper">
+    <section class="steps-section " id="how-it-works">
+      <h2 class="section-heading">An AI tutor that learns with you.<span class="sparkle-text">✣</span></h2>
+
+      <div class="sticky">
+        <article class="step-card">
+          <div class="step-badge">1</div>
+
+          <h3>Ask in the format that works</h3>
+          <p>
+            Students can type or upload questions across math, reading, science,
+            programming, languages, and more.
+          </p>
+
+          <div class="question-box">
+            <div class="question-placeholder">What's your question?</div>
+
+            <div class="toolbar">
+              <div class="tool">
+                <i data-lucide="keyboard"></i>
+              </div>
+
+              <div class="tool">
+                <i data-lucide="mic"></i>
+              </div>
+
+              <div class="tool">
+                <i data-lucide="upload"></i>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="arrow arrow-1">
+          <svg viewBox="0 0 70 28" fill="none">
+            <path d="M2 22C18 11 39 4 62 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M58 9L66 17L55 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <article class="step-card">
+          <div class="step-badge">2</div>
+
+          <h3>Solution checks are built in</h3>
+          <p>
+            Reasoning is checked before explanations are presented, reducing
+            the chance of incorrect or misleading steps.
+          </p>
+
+          <div class="mini-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="validation-box">
+            <div class="shield-gradient">
+              <i data-lucide="shield"></i>
+
+              <div class="shield-check">
+                <i data-lucide="check"></i>
+              </div>
+            </div>
+
+            <div class="validation-content">
+              <strong>Validating solution...</strong>
+
+              <div class="progress">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="arrow arrow-2">
+          <svg viewBox="0 0 70 28" fill="none">
+            <path d="M2 22C18 11 39 4 62 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M58 9L66 17L55 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <article class="step-card">
+          <div class="step-badge">3</div>
+
+          <h3>Explanations adapt by level</h3>
+          <p>
+            Responses adjust to the student's level with structured explanations
+            and clear pacing.
+          </p>
+
+          <div class="explanation-box">
+            <div class="check-list">
+              <div class="check-row">
+                <div class="check-dot">
+                  <i data-lucide="check"></i>
+                </div>
+                <div class="line"></div>
+              </div>
+
+              <div class="check-row">
+                <div class="check-dot">
+                  <i data-lucide="check"></i>
+                </div>
+                <div class="line small"></div>
+              </div>
+
+              <div class="check-row">
+                <div class="check-dot">
+                  <i data-lucide="check"></i>
+                </div>
+                <div class="line"></div>
+              </div>
+
+              <div class="check-row">
+                <div class="check-dot">
+                  <i data-lucide="check"></i>
+                </div>
+                <div class="line small"></div>
+              </div>
+            </div>
+
+            <div class="sparkle-circle">
+              <i data-lucide="sparkles"></i>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="subjects-grid-wrapper">
+    <div class="subjects-grid" id="subjects">
+      <div class="subjects-heading">
+        <h2 class="section-heading">Built for everyday academic work.</h2>
+        <p class="section-kicker">Core subjects, structured explanations, and consistent review in one place.</p>
+      </div>
+      <div class="sticky">
+        <div class="subject-card bg-1">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 22.5L10.3 26.8L16.8 10.2" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+            <path d="M20.5 13.5H31.5" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M23.2 28L29 18.3" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M23.5 18.3L29.3 28" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>Algebra</span>
+        </div>
+
+        <div class="subject-card bg-2">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="5.5" width="20" height="29" rx="2.5" stroke="#43CAD3" stroke-width="2.1"></rect>
+            <path d="M10 15.5H30" stroke="#43CAD3" stroke-width="2.1"></path>
+            <path d="M20 15.5V34.5" stroke="#43CAD3" stroke-width="2.1"></path>
+            <path d="M14.5 24H18" stroke="#43CAD3" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M16.25 22.25V25.75" stroke="#43CAD3" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M23 23L27 27" stroke="#43CAD3" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M27 23L23 27" stroke="#43CAD3" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <span>Math</span>
+        </div>
+
+        <div class="subject-card bg-3">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M7.5 11.5C7.5 10.4 8.4 9.5 9.5 9.5H16.3C18.3 9.5 20 11.2 20 13.2V31C20 29 18.3 27.3 16.3 27.3H9.5C8.4 27.3 7.5 26.4 7.5 25.3V11.5Z"
+              stroke="#4C73E8" stroke-width="2.2" stroke-linejoin="round"></path>
+            <path
+              d="M32.5 11.5C32.5 10.4 31.6 9.5 30.5 9.5H23.7C21.7 9.5 20 11.2 20 13.2V31C20 29 21.7 27.3 23.7 27.3H30.5C31.6 27.3 32.5 26.4 32.5 25.3V11.5Z"
+              stroke="#4C73E8" stroke-width="2.2" stroke-linejoin="round"></path>
+          </svg>
+          <span>Reading</span>
+        </div>
+
+        <div class="subject-card bg-4">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M10.5 29.8L12.8 21.8L28.5 6.1C29.8 4.8 32 4.8 33.3 6.1C34.6 7.4 34.6 9.6 33.3 10.9L17.6 26.6L10.5 29.8Z"
+              stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M25.8 8.8L30.6 13.6" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>Writing</span>
+        </div>
+
+        <div class="subject-card bg-5">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.5 5.5H23.5" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M18 5.5V15.5L10.7 30.3C10 31.9 11.1 34 12.9 34H27.1C28.9 34 30 31.9 29.3 30.3L22 15.5V5.5"
+              stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M15 27H25" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M17.5 31H22.5" stroke="#43CAD3" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>Science</span>
+        </div>
+
+        <div class="subject-card bg-6">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 10L6.5 20L14 30" stroke="#3E71F3" stroke-width="2.4" stroke-linecap="round"
+              stroke-linejoin="round">
+            </path>
+            <path d="M26 10L33.5 20L26 30" stroke="#3E71F3" stroke-width="2.4" stroke-linecap="round"
+              stroke-linejoin="round">
+            </path>
+            <path d="M22.5 7.5L17.5 32.5" stroke="#3E71F3" stroke-width="2.4" stroke-linecap="round"></path>
+          </svg>
+          <span>Programming</span>
+        </div>
+
+        <div class="subject-card bg-7">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.5 30L17.2 9.5L25.8 30" stroke="#745CFF" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+            <path d="M12.1 21.8H22.1" stroke="#745CFF" stroke-width="2.5" stroke-linecap="round"></path>
+            <path d="M30 19.5V30" stroke="#745CFF" stroke-width="2.5" stroke-linecap="round"></path>
+            <path d="M30 24C31 21.5 34.5 21.5 35.3 24" stroke="#745CFF" stroke-width="2.5" stroke-linecap="round">
+            </path>
+          </svg>
+          <span>English</span>
+        </div>
+
+        <div class="subject-card bg-8">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 13.8C15.6 12 18.9 12 20.5 13.8C22.1 15.5 25.4 15.5 27 13.8" stroke="#3E71F3" stroke-width="2.2"
+              stroke-linecap="round"></path>
+            <path d="M17.5 30V19.2" stroke="#3E71F3" stroke-width="2.5" stroke-linecap="round"></path>
+            <path d="M17.5 23.2C19.1 19.8 25 19.8 25 24.5V30" stroke="#3E71F3" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          <span>Spanish</span>
+        </div>
+
+        <div class="subject-card bg-9">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 13L20 7.5L31 13H9Z" stroke="#3E71F3" stroke-width="2.2" stroke-linejoin="round"></path>
+            <path d="M11 31H29" stroke="#3E71F3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M8.5 34.5H31.5" stroke="#3E71F3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M13.2 13V31" stroke="#3E71F3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M20 13V31" stroke="#3E71F3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M26.8 13V31" stroke="#3E71F3" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>History</span>
+        </div>
+
+        <div class="subject-card bg-10">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="13" stroke="#3E71F3" stroke-width="2.2"></circle>
+            <path d="M7 20H33" stroke="#3E71F3" stroke-width="2.2" stroke-linecap="round"></path>
+            <path d="M20 7C23.7 10.7 25.5 15.2 25.5 20C25.5 24.8 23.7 29.3 20 33" stroke="#3E71F3" stroke-width="2.2"
+              stroke-linecap="round"></path>
+            <path d="M20 7C16.3 10.7 14.5 15.2 14.5 20C14.5 24.8 16.3 29.3 20 33" stroke="#3E71F3" stroke-width="2.2"
+              stroke-linecap="round"></path>
+          </svg>
+          <span>Geography</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="composition" id="for-parents">
+    <section class="parents-copy" aria-label="For parents">
+      <div class="title-row">
+        <h1>Progress parents can review.</h1>
+        <svg class="sparkles" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M14.5 3.5 17 11.2l7.3 2.4-7.3 2.5-2.5 7.7-2.5-7.7-7.3-2.5 7.3-2.4 2.5-7.7Z" fill="#25cec5"></path>
+          <path d="M29 8.5 30.4 13l4.1 1.4-4.1 1.4L29 20.3l-1.4-4.5-4.1-1.4 4.1-1.4L29 8.5Z" fill="#7d6df2"></path>
+          <path d="M28 24.2 29.4 28.5l4.2 1.5-4.2 1.4-1.4 4.4-1.4-4.4-4.2-1.4 4.2-1.5 1.4-4.3Z" fill="#8d7af5"
+            opacity=".72"></path>
+        </svg>
+      </div>
+      <p class="intro">Parents can review study activity, completed lessons,<br>and areas that may need more practice.</p>
+      <ul class="feature-list">
+        <li class="feature"><span class="icon-bubble"><svg viewBox="0 0 24 24">
+              <path d="M12 3.6 21 20H3l9-16.4Z"></path>
+              <path d="M12 9v4.3"></path>
+              <path d="M12 16.7h.01"></path>
+            </svg></span>
+          <p>Answers are checked before explanations are shown.</p>
+        </li>
+        <li class="feature"><span class="icon-bubble"><svg viewBox="0 0 24 24">
+              <path d="M12 3.5S6.6 10 6.6 14.1a5.4 5.4 0 0 0 10.8 0C17.4 10 12 3.5 12 3.5Z"></path>
+              <path d="M9.3 15.3h5.4"></path>
+              <path d="M10.5 12.2h3"></path>
+            </svg></span>
+          <p>Reading tools support clearer review of instructions and steps.</p>
+        </li>
+        <li class="feature"><span class="icon-bubble"><svg viewBox="0 0 24 24">
+              <path d="M12 3.2 14.5 9.5 21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3.2Z"></path>
+            </svg></span>
+          <p>Explanations adjust to the student's current level.</p>
+        </li>
+        <li class="feature"><span class="icon-bubble"><svg viewBox="0 0 24 24">
+              <path d="M12 3 15.2 8.8 21 12l-5.8 3.2L12 21l-3.2-5.8L3 12l5.8-3.2L12 3Z"></path>
+              <path d="M12 9.2v5.6"></path>
+              <path d="M9.2 12h5.6"></path>
+            </svg></span>
+          <p>Students can review the reasoning behind each answer.</p>
+        </li>
+        <li class="feature"><span class="icon-bubble"><svg viewBox="0 0 24 24">
+              <path d="m12 3.5 2.3 5.7 6.2.8-4.7 4 1.3 6-5.1-3.2L6.9 20l1.3-6-4.7-4 6.2-.8L12 3.5Z"></path>
+            </svg></span>
+          <p>Progress is tracked over repeated study sessions.</p>
+        </li>
+        <li class="feature"><span class="icon-bubble"><svg viewBox="0 0 24 24">
+              <rect x="5" y="4" width="14" height="16" rx="4"></rect>
+              <path d="M9 9.5c1.5 0 1.5 2 3 2s1.5-2 3-2"></path>
+              <path d="M8.5 15.5h7"></path>
+            </svg></span>
+          <p>Practice gaps are easier to identify and revisit.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dashboard-shell" aria-label="AI learning dashboard">
+      <aside class="sidebar">
+        <div class="logo"><img src="logo-collapsed.png" alt="AlgAI"></div>
+        <nav class="nav" aria-label="Dashboard navigation">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 11.5 12 4l9 7.5"></path>
+            <path d="M5.5 10.5V20h5v-5.5h3V20h5v-9.5"></path>
+          </svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M5 20V11"></path>
+            <path d="M12 20V5"></path>
+            <path d="M19 20v-8"></path>
+            <path d="M3 20h18"></path>
+          </svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H20v17H8.5A3.5 3.5 0 0 0 5 22z"></path>
+            <path d="M5 5.5V22"></path>
+          </svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M4 5h16v11H8l-4 4z"></path>
+          </svg>
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3.2"></circle>
+            <path
+              d="M19.4 15a8 8 0 0 0 .1-5.8l-2.2-.6-.9-2.1 1.1-2A8.7 8.7 0 0 0 12 2.5l-1.2 1.9-2.3.4-1.7-1.5A8.4 8.4 0 0 0 3.6 8l1.3 1.8-.4 2.3-1.9 1.2a8.8 8.8 0 0 0 2.1 5.2l2.1-.9 2 .9.7 2.2a8.5 8.5 0 0 0 5.5-.1l.7-2.2 2-.9z">
+            </path>
+          </svg>
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="header">
+          <h2>Hi, Alex! <span style="font-size:14px">👋</span></h2>
+          <p>Here's your progress this week</p>
+        </header>
+        <section class="stats">
+          <div class="card stat-card">
+            <div class="stat-label">Lessons completed</div>
+            <div class="stat-value">24</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-label">Study time</div>
+            <div class="stat-value">6h 35m</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-label">Questions solved</div>
+            <div class="stat-value">153</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-label">Current streak</div>
+            <div class="stat-value">7 days🔥</div>
+          </div>
+        </section>
+        <section class="grid-main">
+          <div class="card large-card">
+            <h3 class="card-title">Learning progress</h3>
+            <p class="card-subtitle">This week</p>
+            <div class="chart">
+              <div class="chart-percent">86%</div>
+              <svg viewBox="0 0 520 178">
+                <defs>
+                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2bd397" stop-opacity=".22"></stop>
+                    <stop offset="100%" stop-color="#2bd397" stop-opacity=".03"></stop>
+                  </linearGradient>
+                </defs>
+                <line x1="54" y1="20" x2="506" y2="20" stroke="#edf1f8"></line>
+                <line x1="54" y1="62" x2="506" y2="62" stroke="#edf1f8"></line>
+                <line x1="54" y1="104" x2="506" y2="104" stroke="#edf1f8"></line>
+                <line x1="54" y1="146" x2="506" y2="146" stroke="#edf1f8"></line>
+                <text x="2" y="24" class="axis-label">100</text><text x="10" y="66" class="axis-label">75</text><text
+                  x="10" y="108" class="axis-label">50</text><text x="10" y="150" class="axis-label">25</text><text
+                  x="19" y="172" class="axis-label">0</text>
+                <path d="M54 136 L122 110 L190 110 L258 84 L326 84 L390 66 L452 20 L506 20 L506 146 L54 146 Z"
+                  fill="url(#areaGradient)"></path>
+                <path d="M54 136 L122 110 L190 110 L258 84 L326 84 L390 66 L452 20 L506 20" fill="none" stroke="#2ac58b"
+                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <g fill="#2ac58b">
+                  <circle cx="54" cy="136" r="3.4"></circle>
+                  <circle cx="122" cy="110" r="3.4"></circle>
+                  <circle cx="190" cy="110" r="3.4"></circle>
+                  <circle cx="258" cy="84" r="3.4"></circle>
+                  <circle cx="326" cy="84" r="3.4"></circle>
+                  <circle cx="390" cy="66" r="3.4"></circle>
+                  <circle cx="452" cy="20" r="3.4"></circle>
+                  <circle cx="506" cy="20" r="3.4"></circle>
+                </g>
+                <text x="43" y="174" class="day-label">Mon</text><text x="112" y="174" class="day-label">Tue</text><text
+                  x="180" y="174" class="day-label">Wed</text><text x="251" y="174" class="day-label">Thu</text><text
+                  x="322" y="174" class="day-label">Fri</text><text x="385" y="174" class="day-label">Sat</text><text
+                  x="495" y="174" class="day-label">Sun</text>
+              </svg>
+            </div>
+          </div>
+          <div class="card large-card confidence">
+            <h3 class="card-title">Confidence level</h3>
+            <p class="card-subtitle">Improving steadily</p>
+            <div class="donut-wrap">
+              <div>
+                <div class="donut"><svg viewBox="0 0 120 120">
+                    <defs>
+                      <linearGradient id="donutGradient" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#20bf86"></stop>
+                        <stop offset="48%" stop-color="#29c7c5"></stop>
+                        <stop offset="100%" stop-color="#445af4"></stop>
+                      </linearGradient>
+                    </defs>
+                    <circle class="donut-bg" cx="60" cy="60" r="45"></circle>
+                    <circle class="donut-progress" cx="60" cy="60" r="45" pathLength="100"></circle>
+                  </svg>
+                  <div class="donut-value">82%</div>
+                </div>
+                <div class="donut-caption">Great job!</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="bottom-grid">
+          <div class="card small-card">
+            <h3 class="card-title">Top strengths</h3>
+            <div class="pills"><span class="pill blue">Algebra</span><span class="pill green-pill">Reading</span><span
+                class="pill mint-pill">Science</span></div>
+          </div>
+          <div class="card small-card">
+            <h3 class="card-title">Needs more practice</h3>
+            <div class="pills"><span class="pill orange">Writing</span><span class="pill pink">Spanish</span></div>
+          </div>
+          <div class="card sessions">
+            <h3 class="card-title">Recent sessions</h3>
+            <div class="session-list">
+              <div class="session">
+                <div class="session-icon"><svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path>
+                  </svg></div>
+                <div>
+                  <p class="session-title">Solving linear equations</p>
+                  <p class="session-time">Today, 4:16 PM</p>
+                </div>
+                <div class="check"><svg viewBox="0 0 24 24">
+                    <path d="m6 12 4 4 8-8"></path>
+                  </svg></div>
+              </div>
+              <div class="session">
+                <div class="session-icon"><svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path>
+                  </svg></div>
+                <div>
+                  <p class="session-title">Reading comprehension</p>
+                  <p class="session-time">Wednesday, 2:31 PM</p>
+                </div>
+                <div class="check"><svg viewBox="0 0 24 24">
+                    <path d="m6 12 4 4 8-8"></path>
+                  </svg></div>
+              </div>
+              <div class="session">
+                <div class="session-icon"><svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path>
+                  </svg></div>
+                <div>
+                  <p class="session-title">Intro to Python loops</p>
+                  <p class="session-time">Yesterday, 8:22 PM</p>
+                </div>
+                <div class="check"><svg viewBox="0 0 24 24">
+                    <path d="m6 12 4 4 8-8"></path>
+                  </svg></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </section>
+  </div>
+
+
+  <main class="about-section" id="about" aria-label="About AlgAI">
+    <section class="about-copy" aria-labelledby="about-title">
+      <div class="heading">
+        <h1 id="about-title">About us</h1>
+
+        <svg class="sparkles" viewBox="0 0 40 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 2L20.6 9.4L28 12L20.6 14.6L18 22L15.4 14.6L8 12L15.4 9.4L18 2Z" fill="#45C4BD" />
+          <path d="M31 18L32.7 23.3L38 25L32.7 26.7L31 32L29.3 26.7L24 25L29.3 23.3L31 18Z" fill="#6276D9" />
+          <path d="M9 29L10.6 33.4L15 35L10.6 36.6L9 41L7.4 36.6L3 35L7.4 33.4L9 29Z" fill="#5EC9C7" />
+          <path d="M25 38L26.1 41.9L30 43L26.1 44.1L25 48L23.9 44.1L20 43L23.9 41.9L25 38Z" fill="#74C8A8" />
+        </svg>
+      </div>
+
+      <p>
+        AlgAI is designed and built by remote international specialists
+        across the Americas,<br />with operations in Brazil and the United States.
+      </p>
+
+      <p>
+        We build AI learning tools focused on clarity,<br />
+        structure, and adaptive explanations for everyone.
+      </p>
+      <p>Because each one process information differently, so we all learn together.</p>
+    </section>
+
+    <div class="map-wrap" aria-hidden="true">
+      <img class="world-map" src="world_map.svg" alt="" />
+    </div>
+
+    <article class="team-card" aria-labelledby="mission-title">
+      <h2 id="mission-title">
+        A remote team<br />
+        with a shared mission
+      </h2>
+
+      <p class="description">
+        Educators, engineers, designers,<br />
+        and researchers working<br />
+        together to make learning<br />
+        more accessible and<br />
+        empowering through AI.
+      </p>
+
+      <div class="avatars" aria-label="Team members">
+        <div class="avatar">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Team member">
+            <rect width="64" height="64" fill="#d9eef1" />
+            <circle cx="32" cy="28" r="14" fill="#f3b37c" />
+            <path d="M17 29c1-13 9-19 18-17 9 2 12 9 11 17-5-5-14-6-22-3-2 1-4 2-7 3Z" fill="#223951" />
+            <path d="M17 64c2-13 10-21 15-21s14 8 16 21H17Z" fill="#145f8d" />
+            <circle cx="27" cy="29" r="1.9" fill="#1e3754" />
+            <circle cx="38" cy="29" r="1.9" fill="#1e3754" />
+            <path d="M28 36c3 2 6 2 9 0" stroke="#8d5038" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <div class="avatar">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Team member">
+            <rect width="64" height="64" fill="#65d4df" />
+            <circle cx="32" cy="29" r="14" fill="#b86c3f" />
+            <path d="M18 30c1-12 7-18 15-18s13 7 14 18c-7-4-18-5-29 0Z" fill="#2a241d" />
+            <path d="M16 64c3-13 10-21 16-21s14 8 17 21H16Z" fill="#0b7593" />
+            <circle cx="27" cy="30" r="1.8" fill="#1e2628" />
+            <circle cx="38" cy="30" r="1.8" fill="#1e2628" />
+            <path d="M28 37c3 2 6 2 8 0" stroke="#713d27" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <div class="avatar">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Team member">
+            <rect width="64" height="64" fill="#4bbcc4" />
+            <circle cx="32" cy="29" r="14" fill="#a75d38" />
+            <path d="M17 29c1-12 8-18 15-18 9 0 14 7 15 18-8-4-18-4-30 0Z" fill="#332314" />
+            <path d="M15 64c3-13 11-21 17-21s15 8 18 21H15Z" fill="#16858d" />
+            <circle cx="27" cy="30" r="1.8" fill="#1a2326" />
+            <circle cx="38" cy="30" r="1.8" fill="#1a2326" />
+            <path d="M27 38c3 2 8 2 10 0" stroke="#6d3c27" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <div class="avatar">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Team member">
+            <rect width="64" height="64" fill="#e4d6fb" />
+            <circle cx="32" cy="29" r="14" fill="#c98055" />
+            <path d="M18 64c3-13 10-21 15-21 6 0 14 8 17 21H18Z" fill="#5f3fc4" />
+            <path d="M18 30c1-13 8-20 16-19 8 1 13 8 13 19-5-6-8-8-14-8-5 0-9 2-15 8Z" fill="#3b211c" />
+            <circle cx="27" cy="30" r="1.8" fill="#1d2428" />
+            <circle cx="38" cy="30" r="1.8" fill="#1d2428" />
+            <path d="M28 37c3 2 6 2 8 0" stroke="#7d452e" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="location">
+        <div class="pin-wrap" aria-hidden="true">
+          <svg class="pin" viewBox="0 0 24 24" fill="none">
+            <path d="M12 21s6-5.6 6-11a6 6 0 1 0-12 0c0 5.4 6 11 6 11Z" fill="#aee5e2" stroke="#49b9b6"
+              stroke-width="1.8" />
+            <circle cx="12" cy="10" r="2.3" fill="#ffffff" stroke="#49b9b6" stroke-width="1.5" />
+          </svg>
+        </div>
+
+        <div class="location-text">
+          Operating from Brazil<br />
+          and the United States
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <section class="section" id="get-started">
+    <div class="cta-card">
+      <div class="cta-content">
+        <h1>Start with a clearer way to study.</h1>
+        <p>Use structured explanations, reading tools, and progress tracking in one place.</p>
+
+        <button class="cta-button">
+          <span>Get started for free</span>
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="m13 6 6 6-6 6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="AlgAI">
+        <p>AI-powered learning with readable steps,<br>audio options, and progress tracking.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Product</h3>
+        <a href="#outcomes">Results</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#subjects">Subjects</a>
+      </div>
+      <div class="footer-col">
+        <h3>Audience</h3>
+        <a href="#support">Reading support</a>
+        <a href="#for-parents">For parents</a>
+        <a href="#testimonials">Stories</a>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <a href="#about">About us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#get-started">Get started</a>
+      </div>
+      <div class="footer-col">
+        <h3>Follow</h3>
+        <div class="socials" aria-label="Social links">
+          <span>t</span><span>ig</span><span>in</span><span>▶</span>
+        </div>
+        <p class="copyright">© 2026 AlgAI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      let ticking = false;
+
+      const updateHeroBackground = () => {
+        const maxScroll = Math.max(1, root.scrollHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        const offset = -60 + (progress * 60);
+
+        root.style.setProperty("--hero-bg-y", `${offset}px`);
+        ticking = false;
+      };
+
+      const queueHeroBackgroundUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateHeroBackground);
+      };
+
+      updateHeroBackground();
+      window.addEventListener("scroll", queueHeroBackgroundUpdate, { passive: true });
+      window.addEventListener("resize", queueHeroBackgroundUpdate);
+    })();
+
+    (() => {
+      const minStickyWidth = 901;
+      const offsetTop = 90;
+      const stickyConfigs = [
+        [".steps-section > .sticky", ".steps-section"],
+        [".subjects-grid > .sticky", ".subjects-grid"],
+        [".dashboard-shell", ".composition"],
+        [".cta-card", ".section"]
+      ];
+
+      const instances = stickyConfigs.flatMap(([selector, parentSelector]) =>
+        Array.from(document.querySelectorAll(selector)).map((element) => ({
+          element,
+          parent: element.closest(parentSelector),
+          spacer: null,
+          state: "normal",
+          parentTop: 0,
+          parentHeight: 0,
+          itemHeight: 0,
+          itemWidth: 0,
+          itemLeft: 0,
+          itemTop: 0,
+          parentLeft: 0,
+          spacerDisplay: "block"
+        })).filter((item) => item.parent)
+      );
+
+      let ticking = false;
+      let needsRecalc = true;
+      let lastBodyHeight = 0;
+
+      const px = (value) => `${Math.round(value * 100) / 100}px`;
+
+      const dispatchStickyEvent = (instance, name) => {
+        instance.element.dispatchEvent(new CustomEvent(`sticky_kit:${name}`, { bubbles: true }));
+      };
+
+      const ensureSpacer = (instance) => {
+        if (instance.spacer) return;
+
+        const spacer = document.createElement("div");
+        spacer.className = "plain-sticky-kit-spacer";
+        spacer.setAttribute("aria-hidden", "true");
+        instance.element.parentNode.insertBefore(spacer, instance.element);
+        instance.spacer = spacer;
+      };
+
+      const setParentPosition = (parent) => {
+        if (getComputedStyle(parent).position === "static") {
+          parent.style.position = "relative";
+        }
+      };
+
+      const clearPosition = (instance) => {
+        const { element, spacer } = instance;
+        element.classList.remove("is_stuck", "is_bottomed");
+        element.style.position = "";
+        element.style.top = "";
+        element.style.left = "";
+        element.style.bottom = "";
+        element.style.width = "";
+        element.style.marginTop = "";
+
+        if (spacer) {
+          spacer.style.display = "none";
+          spacer.style.width = "";
+          spacer.style.height = "";
+        }
+      };
+
+      const updateSpacer = (instance) => {
+        const { spacer } = instance;
+        spacer.style.display = instance.spacerDisplay;
+        spacer.style.width = px(instance.itemWidth);
+        spacer.style.height = px(instance.itemHeight);
+      };
+
+      const setState = (instance, state) => {
+        if (instance.state === state) return;
+
+        if (state === "fixed") {
+          if (instance.state === "normal") dispatchStickyEvent(instance, "stick");
+          if (instance.state === "bottom") dispatchStickyEvent(instance, "unbottom");
+        }
+
+        if (state === "bottom") {
+          if (instance.state === "normal") dispatchStickyEvent(instance, "stick");
+          dispatchStickyEvent(instance, "bottom");
+        }
+
+        if (state === "normal") {
+          if (instance.state === "bottom") dispatchStickyEvent(instance, "unbottom");
+          if (instance.state !== "normal") dispatchStickyEvent(instance, "unstick");
+        }
+
+        instance.state = state;
+      };
+
+      const recalc = () => {
+        const enabled = window.innerWidth >= minStickyWidth;
+        lastBodyHeight = document.body.scrollHeight;
+
+        instances.forEach((instance) => {
+          ensureSpacer(instance);
+          setParentPosition(instance.parent);
+
+          if (!enabled) {
+            setState(instance, "normal");
+            clearPosition(instance);
+            return;
+          }
+
+          const reference = instance.spacer.style.display === "none" ?
+            instance.element :
+            instance.spacer;
+          const parentRect = instance.parent.getBoundingClientRect();
+          const itemRect = reference.getBoundingClientRect();
+          const scrollY = window.scrollY || window.pageYOffset;
+
+          instance.parentTop = parentRect.top + scrollY;
+          instance.parentLeft = parentRect.left;
+          instance.parentHeight = instance.parent.offsetHeight;
+          instance.itemTop = itemRect.top + scrollY;
+          instance.itemLeft = itemRect.left;
+          instance.itemWidth = itemRect.width;
+          instance.itemHeight = instance.element.offsetHeight;
+          instance.spacerDisplay = getComputedStyle(instance.element).display === "inline" ? "inline-block" : "block";
+        });
+
+        tick();
+      };
+
+      const normal = (instance) => {
+        setState(instance, "normal");
+        clearPosition(instance);
+      };
+
+      const fixed = (instance) => {
+        setState(instance, "fixed");
+        updateSpacer(instance);
+        instance.element.classList.add("is_stuck");
+        instance.element.classList.remove("is_bottomed");
+        instance.element.style.position = "fixed";
+        instance.element.style.top = px(offsetTop);
+        instance.element.style.left = px(instance.itemLeft);
+        instance.element.style.width = px(instance.itemWidth);
+        instance.element.style.bottom = "";
+        instance.element.style.marginTop = "0";
+      };
+
+      const bottom = (instance) => {
+        const top = instance.parentHeight - instance.itemHeight;
+        const left = instance.itemLeft - instance.parentLeft;
+
+        setState(instance, "bottom");
+        updateSpacer(instance);
+        instance.element.classList.add("is_stuck", "is_bottomed");
+        instance.element.style.position = "absolute";
+        instance.element.style.top = px(Math.max(0, top));
+        instance.element.style.left = px(left);
+        instance.element.style.width = px(instance.itemWidth);
+        instance.element.style.bottom = "";
+        instance.element.style.marginTop = "0";
+      };
+
+      const tick = () => {
+        const enabled = window.innerWidth >= minStickyWidth;
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        if (!enabled) {
+          instances.forEach(normal);
+          return;
+        }
+
+        if (lastBodyHeight !== document.body.scrollHeight) {
+          needsRecalc = true;
+        }
+
+        instances.forEach((instance) => {
+          const start = instance.itemTop - offsetTop;
+          const parentBottom = instance.parentTop + instance.parentHeight;
+          const bottomStart = parentBottom - offsetTop - instance.itemHeight;
+          const canStick = instance.itemHeight + offsetTop < instance.parentHeight;
+
+          if (!canStick || scrollY < start) {
+            normal(instance);
+          } else if (scrollY >= bottomStart) {
+            bottom(instance);
+          } else {
+            fixed(instance);
+          }
+        });
+      };
+
+      const queueTick = () => {
+        if (ticking) return;
+        ticking = true;
+
+        requestAnimationFrame(() => {
+          if (needsRecalc) {
+            needsRecalc = false;
+            recalc();
+          } else {
+            tick();
+          }
+
+          ticking = false;
+        });
+      };
+
+      const queueRecalc = () => {
+        needsRecalc = true;
+        queueTick();
+      };
+
+      document.body.addEventListener("sticky_kit:recalc", queueRecalc);
+      window.addEventListener("scroll", queueTick, { passive: true });
+      window.addEventListener("resize", queueRecalc);
+      window.addEventListener("load", queueRecalc);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(queueRecalc);
+      }
+
+      if ("ResizeObserver" in window) {
+        const observer = new ResizeObserver(queueRecalc);
+        instances.forEach(({ element, parent }) => {
+          observer.observe(element);
+          observer.observe(parent);
+        });
+      }
+
+      queueRecalc();
+    })();
+
+    (() => {
+      const scrollToHash = (id, behavior = "smooth") => {
+        if (!id || id === "#") return false;
+
+        const target = document.querySelector(id);
+        if (!target) return false;
+
+        target.scrollIntoView({ behavior, block: "start" });
+        return true;
+      };
+
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const id = link.getAttribute("href");
+          if (!scrollToHash(id)) return;
+
+          event.preventDefault();
+          history.pushState(null, "", id);
+        });
+      });
+
+      window.addEventListener("load", () => {
+        if (!window.location.hash) return;
+
+        requestAnimationFrame(() => {
+          scrollToHash(window.location.hash, "auto");
+          window.setTimeout(() => scrollToHash(window.location.hash, "auto"), 250);
+        });
+      });
+    })();
+
+    (() => {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealSelectors = [
+        ".left > *",
+        ".features .feature",
+        ".actions .btn",
+        ".trust",
+        ".app",
+        ".float-card",
+        ".section-intro > *",
+        ".outcome-card",
+        ".support-copy > *",
+        ".support-feature",
+        ".proof-quote",
+        ".faq-item",
+        ".plan-card",
+        ".steps-section .section-heading",
+        ".step-card",
+        ".steps-section .arrow",
+        ".subjects-heading",
+        ".subjects-heading > *",
+        ".subject-card",
+        ".parents-copy .title-row",
+        ".parents-copy .intro",
+        ".feature-list .feature",
+        ".dashboard-shell > .sidebar",
+        ".dashboard-shell .header",
+        ".dashboard-shell .card",
+        ".session",
+        ".about-copy > *",
+        ".map-wrap",
+        ".team-card",
+        ".team-card > *",
+        ".cta-content > *",
+        ".footer-brand",
+        ".footer-col"
+      ];
+
+      const revealItems = Array.from(new Set(
+        revealSelectors.flatMap((selector) => Array.from(document.querySelectorAll(selector)))
+      ));
+
+      revealItems.forEach((item, index) => {
+        item.classList.add("reveal");
+        item.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 70}ms`);
+      });
+
+      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: .16
+      });
+
+      revealItems.forEach((item) => observer.observe(item));
+    })();
+
+    lucide.createIcons();
+  </script>
+
+
+
+</body>
+
+</html>
